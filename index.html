@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sude Begüm Yüksel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE playful developer, still tidy: a CS student showing her work the way she sees it every day
+   IDEA her own IDE: each section is a file or a tool from a developer's day (editor, test runner, git log, package.json, terminal)
+   PICTURE an editor window with tabs beside her portrait; tabs switch between sude.ts, stack.json and readme.md
+   COLOUR one dark code-theme palette: ink ground, panel slate, coral keywords, mint strings, lilac types, butter numbers
+   TYPE Space Grotesk for headings, Inter for prose, JetBrains Mono for code and labels
+   LAYOUT laptop: intro left, portrait + editor right; sections as windows; phone: name, editor, buttons, then windows stacked */
+:root{color-scheme:dark;--bg:#101318;--bg2:#141821;--panel:#181d27;--bar:#1f2532;--line:#283041;--ink:#e8ebf1;--mute:#97a0b3;--coral:#ff7b6b;--mint:#7fe0b6;--lilac:#b7a6ff;--butter:#ffd47a;--sky:#7cc4ff}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px;height:auto}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Inter",system-ui,sans-serif;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.045) 1px,transparent 1px);background-size:22px 22px;z-index:0}
+main,nav,footer{position:relative;z-index:1}
+a{color:inherit}
+img{max-width:100%;display:block}
+p{margin:0}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+h1,h2,h3{font-family:"Space Grotesk","Inter",sans-serif;letter-spacing:-.02em;line-height:1.08;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(5vw,16px)}
+.band{padding-block:clamp(44px,6vw,80px)}
+.k{color:var(--coral)}.s{color:var(--mint)}.t{color:var(--lilac)}.n{color:var(--butter)}.c{color:#6c7489;font-style:italic}.f{color:var(--sky)}
+nav{position:sticky;top:0;z-index:10;background:rgba(16,19,24,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px 20px;min-height:62px;flex-wrap:wrap}
+.logo{font:700 16px "JetBrains Mono",monospace;text-decoration:none}
+.logo b{color:var(--coral)}
+nav ul{display:flex;flex-wrap:wrap;gap:2px;list-style:none;margin:0;padding:0}
+nav ul a{display:block;padding:9px 11px;border-radius:8px;font:500 14px "JetBrains Mono",monospace;color:var(--mute);text-decoration:none}
+nav ul a:hover,nav ul a:focus-visible{background:var(--bar);color:var(--ink);outline:none}
+nav ul a span{color:var(--coral)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center;padding-block:clamp(40px,6vw,88px)}
+.hello{font:500 15px "JetBrains Mono",monospace;color:var(--mint);margin-bottom:16px}
+.hero h1{font-size:clamp(36px,4.4vw,58px);text-wrap:balance}
+.hero h1 .hl{background:linear-gradient(transparent 62%,rgba(255,123,107,.35) 62%);padding:0 4px}
+.role{margin:18px 0 16px;font:500 16px "JetBrains Mono",monospace;color:var(--mute)}
+.role .typed{color:var(--ink)}
+.role .car{display:inline-block;width:9px;height:18px;background:var(--coral);vertical-align:-3px;margin-left:2px}
+.lead{font-size:17.5px;color:#c9cfdb;max-width:31em}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border-radius:10px;font:500 14.5px "JetBrains Mono",monospace;text-decoration:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);transition:transform .15s,border-color .15s}
+.btn:hover,.btn:focus-visible{border-color:var(--mint);transform:translateY(-2px);outline:none}
+.btn.main{background:var(--coral);border-color:var(--coral);color:#1a0f0d;font-weight:700}
+.btn.main:hover,.btn.main:focus-visible{border-color:#fff}
+.stage{position:relative;padding:0 0 26px 0}
+.win{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.wbar{display:flex;align-items:center;gap:7px;padding:0 14px;background:var(--bar);min-height:42px;border-bottom:1px solid var(--line)}
+.dot{width:11px;height:11px;border-radius:50%;background:#3a4357;flex:none}
+.dot:nth-child(1){background:#ff6b5e}.dot:nth-child(2){background:#ffcf5c}.dot:nth-child(3){background:#5fd38a}
+.wtitle{margin-left:10px;font:500 13px "JetBrains Mono",monospace;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{display:flex;gap:2px;margin-left:10px;overflow-x:auto}
+.tab{font:500 13px "JetBrains Mono",monospace;color:var(--mute);background:transparent;border:0;padding:0 14px;min-height:42px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tab[aria-selected=true]{color:var(--ink);background:var(--panel);border-bottom-color:var(--coral)}
+.tab:focus-visible{outline:2px solid var(--mint);outline-offset:-2px}
+.code{display:grid;grid-template-columns:auto minmax(0,1fr);font:14px/1.75 "JetBrains Mono",monospace;padding:16px 0 18px;min-height:318px}
+.code .ln{padding:0 14px 0 16px;color:#4b546a;text-align:right;user-select:none;white-space:pre}
+.code pre{margin:0;padding-right:16px;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
+.blink{display:inline-block;width:8px;height:16px;background:var(--mint);vertical-align:-3px;animation:bl 1.1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.status{display:flex;justify-content:space-between;gap:10px;padding:6px 14px;background:#232a39;font:12px "JetBrains Mono",monospace;color:var(--mute);flex-wrap:wrap}
+.status b{color:var(--mint);font-weight:500}
+.me{margin:0;position:absolute;right:-6px;bottom:-4px;width:clamp(120px,30%,170px);border-radius:14px;overflow:hidden;border:3px solid var(--panel);box-shadow:0 16px 40px rgba(0,0,0,.5);transform:rotate(3deg)}
+.me img{aspect-ratio:4/5;object-fit:cover;width:100%}
+.me span{position:absolute;left:8px;bottom:8px;font:500 11.5px "JetBrains Mono",monospace;background:rgba(16,19,24,.85);padding:3px 8px;border-radius:6px;color:var(--mint)}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:8px 20px;flex-wrap:wrap;margin-bottom:22px}
+.sh h2{font-size:clamp(28px,3.4vw,40px)}
+.sh p{font:500 14px "JetBrains Mono",monospace;color:var(--mute)}
+.about{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px}
+.about .txt{padding:26px 28px}
+.about .txt p{font-size:17px;color:#cfd4de;margin-bottom:14px}
+.about .txt p:last-child{margin-bottom:0}
+.kv{list-style:none;margin:0;padding:18px 24px;font:14px/1.6 "JetBrains Mono",monospace;display:grid;gap:12px}
+.kv li{display:grid;grid-template-columns:minmax(0,7.5em) minmax(0,1fr);gap:12px}
+.kv .key{color:var(--lilac)}
+.run{padding:20px 24px 24px;font:14px/1.7 "JetBrains Mono",monospace}
+.run .cmd{color:var(--mute);margin-bottom:12px}
+.run .cmd b{color:var(--ink);font-weight:500}
+.suite{margin-top:14px}
+.suite:first-of-type{margin-top:0}
+.suite h3{font:700 14.5px "JetBrains Mono",monospace;color:var(--ink);margin-bottom:6px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.suite h3 small{font-weight:400;color:var(--mute);font-size:13px}
+.test{display:grid;grid-template-columns:1.6em minmax(0,1fr);gap:4px;color:#c9cfdb;font-family:"Inter",sans-serif;font-size:15px;line-height:1.55;padding:3px 0;opacity:1}
+.test::before{content:"✓";color:var(--mint);font-family:"JetBrains Mono",monospace;font-weight:700}
+.js .test.wait{opacity:.25}
+.js .test.wait::before{content:"○";color:var(--mute)}
+.sum{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bar{flex:1 1 180px;height:8px;border-radius:99px;background:var(--bar);overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--mint),var(--sky));border-radius:99px;transition:width .3s}
+.pass{color:var(--mint)}
+.rerun{font:500 13px "JetBrains Mono",monospace;background:var(--bar);color:var(--ink);border:1px solid var(--line);border-radius:8px;min-height:40px;padding:0 14px;cursor:pointer}
+.rerun:hover,.rerun:focus-visible{border-color:var(--mint);outline:none}
+.repos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.repo{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s}
+.repo:hover{border-color:#3d4860;transform:translateY(-3px)}
+.repo:last-child:nth-child(even){grid-column:1/-1}
+.repo.big{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px 32px;border-color:rgba(255,123,107,.45);background:linear-gradient(135deg,rgba(255,123,107,.10),var(--panel) 55%)}
+.repo .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px 14px;flex-wrap:wrap}
+.repo h3{font-size:21px}
+.repo h3 .slash{color:var(--mute);font-weight:500}
+.pill{font:500 12px "JetBrains Mono",monospace;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.pill.live{color:var(--mint);border-color:rgba(127,224,182,.45)}
+.pill.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-right:6px;vertical-align:1px;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.repo .d{color:#c9cfdb}
+.repo a.url{font:500 14px "JetBrains Mono",monospace;color:var(--coral);text-decoration:none;border-bottom:1px dashed rgba(255,123,107,.5);align-self:flex-start}
+.repo a.url:hover{border-bottom-style:solid}
+ul.pts{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+ul.pts li{position:relative;padding-left:20px;color:#c9cfdb;font-size:15.5px}
+ul.pts li::before{content:">";position:absolute;left:0;color:var(--coral);font-family:"JetBrains Mono",monospace}
+.langs{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:auto;padding-top:8px;font:13px "JetBrains Mono",monospace;color:var(--mute)}
+.langs span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--c,#888);vertical-align:0}
+.log{padding:8px 0}
+.commit{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 18px;padding:18px 24px;border-top:1px solid var(--line)}
+.commit:first-child{border-top:0}
+.graph{position:relative;width:16px}
+.graph::before{content:"";position:absolute;left:7px;top:0;bottom:-18px;width:2px;background:var(--line)}
+.commit:last-child .graph::before{bottom:auto;height:22px}
+.graph i{position:absolute;left:1px;top:6px;width:14px;height:14px;border-radius:50%;border:3px solid var(--coral);background:var(--panel)}
+.commit.now .graph i{background:var(--coral)}
+.meta{font:13px "JetBrains Mono",monospace;color:var(--mute);display:flex;gap:6px 14px;flex-wrap:wrap}
+.meta .hash{color:var(--butter)}
+.meta .br{color:var(--mint)}
+.commit h3{font-size:19px;margin:6px 0 2px}
+.commit .org{color:var(--mute);margin-bottom:10px}
+.pkg{padding:18px 0 20px;font:14px/1.85 "JetBrains Mono",monospace}
+.pkg .row{display:grid;grid-template-columns:2.2em minmax(0,1fr);padding-right:20px}
+.pkg .ln{color:#4b546a;text-align:right;padding-right:14px}
+.pkg .ind{padding-left:2ch}
+.pkg .ind2{padding-left:4ch}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.list{list-style:none;margin:0;padding:8px 24px 14px}
+.list li{padding:14px 0;border-top:1px dashed var(--line)}
+.list li:first-child{border-top:0}
+.list b{display:block;font-weight:500}
+.list span{font:13px "JetBrains Mono",monospace;color:var(--mute)}
+.term .out{padding:16px 20px 6px;font:14px/1.7 "JetBrains Mono",monospace;min-height:220px;max-height:380px;overflow-y:auto}
+.term .out div{white-space:pre-wrap;overflow-wrap:anywhere}
+.term .out a{color:var(--sky)}
+.prompt{color:var(--mint)}
+.term form{display:flex;align-items:center;gap:8px;padding:6px 20px 16px;font:14px "JetBrains Mono",monospace}
+.term input{flex:1;background:transparent;border:0;color:var(--ink);font:16px "JetBrains Mono",monospace;min-height:40px;outline:none;caret-color:var(--coral)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 18px}
+.chip{font:500 13px "JetBrains Mono",monospace;background:var(--bar);border:1px solid var(--line);color:var(--ink);border-radius:8px;min-height:38px;padding:0 12px;cursor:pointer}
+.chip:hover,.chip:focus-visible{border-color:var(--coral);outline:none}
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:24px;align-items:start}
+.contact h2{font-size:clamp(32px,4vw,48px);margin-bottom:14px}
+.contact .say{color:#c9cfdb;font-size:17px;max-width:28em;margin-bottom:22px}
+.clist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.clist a,.clist div{display:grid;grid-template-columns:minmax(0,6.5em) minmax(0,1fr);gap:12px;padding:14px 18px;border-radius:12px;background:var(--panel);border:1px solid var(--line);text-decoration:none;font:14px "JetBrains Mono",monospace;transition:border-color .15s}
+.clist a:hover,.clist a:focus-visible{border-color:var(--mint);outline:none}
+.clist .key{color:var(--lilac)}
+.clist span:last-child{overflow-wrap:anywhere}
+footer{border-top:1px solid var(--line);padding:22px 0;font:13px "JetBrains Mono",monospace;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media(max-width:900px){
+.hero .wrap,.about,.contact,.cols,.repo.big{grid-template-columns:minmax(0,1fr)}
+.stage{max-width:620px}
+}
+@media(max-width:600px){
+nav .wrap{flex-wrap:nowrap;gap:12px}
+nav ul{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+nav ul::-webkit-scrollbar{display:none}
+nav ul li{flex:none}
+.logo{flex:none}
+.me{position:relative;right:auto;bottom:auto;width:118px;margin:-46px 10px 0 auto}
+.stage{padding-bottom:0}
+.repos{grid-template-columns:minmax(0,1fr)}
+.code{font-size:12.5px;min-height:0}
+.commit{padding:16px 16px}
+.about .txt{padding:20px}
+nav ul a{padding:8px 7px;font-size:13px}
+.clist a,.clist div{grid-template-columns:minmax(0,1fr);gap:2px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">sude<b>.</b>yuksel</a>
+    <ul>
+      <li><a href="#hakkimda"><span>#</span>hakkımda</a></li>
+      <li><a href="#deneyim"><span>#</span>deneyim</a></li>
+      <li><a href="#projeler"><span>#</span>projeler</a></li>
+      <li><a href="#yetkinlikler"><span>#</span>stack</a></li>
+      <li><a href="#terminal"><span>#</span>terminal</a></li>
+      <li><a href="#iletisim"><span>#</span>iletişim</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="hello">&gt; console.log("Merhaba dünya!")</p>
+      <h1>Ben <span class="hl">Sude</span>,<br>öğreniyor, deniyor, üretiyorum.</h1>
+      <p class="role">// <span class="typed" id="typed">Bilgisayar mühendisliği öğrencisi</span><span class="car blink" aria-hidden="true"></span></p>
+      <p class="lead">TED Üniversitesi'nde Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. Almanya'da bir yazılım şirketinde geliştirici ve QA stajyeri olarak çalıştım; şu anda canlıda yayında olan bir hızlı okuma eğitim platformu geliştiriyorum.</p>
+      <div class="btns">
+        <a class="btn main" href="#iletisim">iletisime_gec()</a>
+        <a class="btn" href="https://github.com/sudebegumyksl">GitHub ↗</a>
+        <a class="btn" href="https://www.linkedin.com/in/sude-begum-yuksel-9127b8324">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="win">
+        <div class="wbar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <div class="tabs" role="tablist" aria-label="Dosyalar">
+            <button class="tab" role="tab" aria-selected="true" data-f="0" id="tab0">sude.ts</button>
+            <button class="tab" role="tab" aria-selected="false" data-f="1" id="tab1">stack.json</button>
+            <button class="tab" role="tab" aria-selected="false" data-f="2" id="tab2">README.md</button>
+          </div>
+        </div>
+        <div class="code"><div class="ln" id="ln"></div><pre id="src"><span class="k">const</span> sude: <span class="t">Developer</span> = {
+  ad: <span class="s">"Sude Begüm Yüksel"</span>,
+  okul: <span class="s">"TED Üniversitesi"</span>,
+  bolum: <span class="s">"Bilgisayar Mühendisliği"</span>,
+  yanDal: <span class="s">"Öğrenme Mühendisliği"</span>,
+  sinif: <span class="n">4</span>,
+  deneyim: [<span class="s">"Web"</span>, <span class="s">"Test"</span>, <span class="s">"EdTech"</span>],
+  alan: <span class="s">"henüz seçmedim"</span>,
+  sehir: <span class="s">"Ankara"</span>,
+  yeniAlanlaraAcik: <span class="k">true</span>,
+};</pre></div>
+        <div class="status"><span><b>●</b> main</span><span>TypeScript · UTF-8</span></div>
+      </div>
+      <figure class="me"><img src="p.jpg" alt="Sude Begüm Yüksel"><span>@sude</span></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="hakkimda">
+  <div class="wrap">
+    <div class="sh"><h2>Hakkımda</h2><p>cat hakkimda.md</p></div>
+    <div class="about">
+      <div class="win">
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">hakkimda.md</span></div>
+        <div class="txt">
+          <p>TED Üniversitesi Bilgisayar Mühendisliği (İngilizce) 4. sınıf öğrencisiyim ve Öğrenme Mühendisliği (İngilizce) yan dalı yapıyorum.</p>
+          <p>Full-stack geliştirme ve yazılım test alanlarında deneyim kazandım. BCS-IT GmbH'de önce geliştirici olarak bir staj yönetim sistemi geliştirdim; şimdi aynı şirkette QA stajyeri olarak manuel testler ve Playwright ile test otomasyonu yürütüyorum.</p>
+          <p>Henüz tek bir alan seçmedim; farklı teknoloji alanlarını keşfetmeye ve kendimi sürekli geliştirmeye açığım.</p>
+        </div>
+      </div>
+      <div class="win">
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">.env.profile</span></div>
+        <ul class="kv">
+          <li><span class="key">KONUM</span><span>Yenimahalle, Ankara</span></li>
+          <li><span class="key">OKUL</span><span>TED Üniversitesi</span></li>
+          <li><span class="key">DİLLER</span><span>TR · EN (B2) · DE (A2)</span></li>
+          <li><span class="key">EKİP</span><span>Scrum / Agile</span></li>
+          <li><span class="key">TOPLULUK</span><span>GDG on Campus TEDÜ</span></li>
+          <li><span class="key">EHLİYET</span><span>B sınıfı</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="deneyim">
+  <div class="wrap">
+    <div class="sh"><h2>Deneyim</h2><p>git log --kariyer</p></div>
+    <div class="win">
+      <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">~/kariyer — git log</span></div>
+      <div class="log">
+        <article class="commit now">
+          <div class="graph"><i></i></div>
+          <div>
+            <div class="meta"><span class="hash">HEAD</span><span class="br">(qa-stajyeri)</span><span>Eyl. 2026 – Devam ediyor</span></div>
+            <h3>Yazılım Test Stajyeri (QA)</h3>
+            <p class="org">BCS-IT GmbH, Almanya</p>
+            <ul class="pts">
+              <li>Salevali projesinde test senaryoları hazırlıyor, fonksiyonel ve regresyon testleri yürütüyor, hataları raporlayıp takip ediyorum.</li>
+              <li>Playwright eğitimi alarak uçtan uca (E2E) test otomasyonu geliştiriyorum.</li>
+              <li>Scrum ekibinde sprint planlama, daily stand-up, sprint review ve retrospektif toplantılarına katılıyorum.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="commit">
+          <div class="graph"><i></i></div>
+          <div>
+            <div class="meta"><span class="br">(developer-stajyeri)</span><span>Haz. 2026 – Tem. 2026</span></div>
+            <h3>Yazılım Geliştirme Stajyeri</h3>
+            <p class="org">BCS-IT GmbH, Almanya · <a href="https://interncrm.com" style="color:var(--coral)">interncrm.com ↗</a></p>
+            <ul class="pts">
+              <li>Excel tabanlı takibin yerini alan, mentor–mentee ve staj adayı süreçlerini yöneten Internship CRM sistemini geliştirdim.</li>
+              <li>Next.js 15, React 19, TypeScript ve Tailwind CSS ile admin, mentor ve mentee için rol bazlı dashboard'lar oluşturdum.</li>
+              <li>MySQL veritabanını Prisma ORM ile modelledim; 7 aşamalı aday akışı, görüşme kayıtları ve filtreleme geliştirdim.</li>
+              <li>NextAuth (JWT) kimlik doğrulama, e-posta daveti ve node-cron hatırlatmaları kurdum; Docker ile paketleyip 3 dil desteği ekledim.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="commit">
+          <div class="graph"><i></i></div>
+          <div>
+            <div class="meta"><span class="br">(teknokent)</span><span>2024 – 2025</span></div>
+            <h3>Dijital Platform Ekibi (Yarı Zamanlı)</h3>
+            <p class="org">Eğitim Yazılımı Girişimi · Ankara Üniversitesi Teknokent</p>
+            <ul class="pts">
+              <li>Eğitim yazılımı geliştiren bir girişimin dijital platformunda geliştirme ve iyileştirme çalışmalarında yer aldım; çalışmayı ders programıyla eş zamanlı yürüttüm.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="projeler">
+  <div class="wrap">
+    <div class="sh"><h2>Projeler</h2><p>ls ~/projeler</p></div>
+    <div class="repos">
+      <article class="repo big">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="top"><h3><span class="slash">sude /</span> hizli-okuyabilirsin</h3><span class="pill live">canlıda</span></div>
+          <p class="d">Çocuk ve yetişkinler için okuma akıcılığını ve okuduğunu anlamayı geliştiren hızlı okuma ve anlama programı. Ekip arkadaşımla birlikte geliştiriyorum.</p>
+          <a class="url" href="https://hizliokuyabilirsin.com">hizliokuyabilirsin.com ↗</a>
+          <p class="langs"><span>2026 – Devam ediyor</span></p>
+        </div>
+        <ul class="pts">
+          <li>KEİS, Akıllı Kurs, Paragraf ve ödev modüllerinde özellik geliştirip hataları giderdim.</li>
+          <li>Çok kademeli hesap hiyerarşisinde kurum bazlı modül kısıtlama kurallarını tasarladım.</li>
+          <li>Ortak egzersiz ses sistemi, avatarlar ve zayıf internet iyileştirmeleri geliştirdim.</li>
+          <li>Admin panelini test edip hata raporladım; sürümleri yedekli ve geri alınabilir yayınladım.</li>
+          <li>Hesap bazlı Türkçe/İngilizce dil desteğini tüm sisteme ekleme çalışmasını yürütüyorum.</li>
+        </ul>
+      </article>
+      <article class="repo">
+        <div class="top"><h3><span class="slash">bcs-it /</span> interncrm</h3><span class="pill live">canlıda</span></div>
+        <p class="d">Staj ve mentorluk programlarını başvurudan işe alıma kadar yöneten platform: mentee, mentor ve partner şirket için ayrı görünümler, aşama bazlı aday akışı ve görüşme takibi. Developer stajımda ekiple geliştirdiğimiz, açık kaynak (AGPL-3.0) bir proje; İngilizce, Türkçe ve Almanca destekli.</p>
+        <a class="url" href="https://interncrm.com">interncrm.com ↗</a>
+        <p class="langs"><span style="--c:#3178c6">TypeScript</span><span style="--c:#e8ebf1">Next.js</span><span style="--c:#4479a1">MySQL</span><span style="--c:#7fe0b6">Prisma</span><span style="--c:#2496ed">Docker</span></p>
+      </article>
+      <article class="repo">
+        <div class="top"><h3><span class="slash">sude /</span> finansmax</h3><span class="pill">2026</span></div>
+        <p class="d">Faturalama, çek takibi, otomatik hatırlatma ve veri içe/dışa aktarma içeren çok kiracılı (multi-tenant) SaaS finans platformu. Rol bazlı yetkilendirme, kiracı bazlı veri izolasyonu, CSRF korumalı güvenlik katmanı ve Playwright ile uçtan uca testler.</p>
+        <p class="langs"><span style="--c:#3178c6">TypeScript</span><span style="--c:#e8ebf1">Next.js</span><span style="--c:#4a90c8">PostgreSQL</span><span style="--c:#7fe0b6">Prisma</span><span style="--c:#2496ed">Docker</span><span style="--c:#ff7b6b">Playwright</span></p>
+      </article>
+      <article class="repo">
+        <div class="top"><h3><span class="slash">sude /</span> campus-events</h3><span class="pill">2025</span></div>
+        <p class="d">Kampüs etkinlikleri için Event, User, Location ve Organizer varlıklarını içeren ER diyagramı ve 1-N / N-N ilişkili, normalize edilmiş bir veritabanı şeması.</p>
+        <p class="langs"><span style="--c:#cc2927">MS SQL Server</span><span style="--c:#ffd47a">SQL</span><span style="--c:#b7a6ff">ER modelleme</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="yetkinlikler">
+  <div class="wrap">
+    <div class="sh"><h2>Stack ve testler</h2><p>npx playwright test sude</p></div>
+    <div class="cols">
+      <div class="win">
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">package.json</span></div>
+        <div class="pkg" id="pkg"></div>
+      </div>
+      <div class="win">
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">sude.spec.ts — test raporu</span></div>
+        <div class="run">
+          <p class="cmd">$ <b>npx playwright test sude.spec.ts</b></p>
+          <div id="suites"></div>
+          <div class="sum"><span class="pass" id="passTxt"></span><div class="bar"><i id="barI"></i></div><button class="rerun" id="rerun" type="button">↻ tekrar çalıştır</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sh"><h2>Eğitim ve topluluk</h2><p>cat egitim.yml</p></div>
+    <div class="cols">
+      <div class="win">
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">egitim.yml</span></div>
+        <ul class="list">
+          <li><b>TED Üniversitesi — Bilgisayar Mühendisliği (İngilizce)</b><span>lisans · 2023 – devam ediyor</span></li>
+          <li><b>TED Üniversitesi — Öğrenme Mühendisliği (İngilizce)</b><span>yan dal · 2026 – devam ediyor</span></li>
+          <li><b>Cahit Elginkan Anadolu Lisesi</b><span>2018 – 2022</span></li>
+          <li><b>Software Engineering (3 kurs) — HKUST, Coursera</b><span>sertifika · 2026</span></li>
+          <li><b>Playwright: Web Automation Testing From Zero to Hero — Udemy</b><span>sertifika · 2026</span></li>
+          <li><b>Sıfırdan Komple Java Geliştirici Eğitimi (42 saat) — Ankyra Analytics</b><span>sertifika · 2025</span></li>
+        </ul>
+      </div>
+      <div class="win">
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">topluluk.yml</span></div>
+        <ul class="list">
+          <li><b>Başkan — TED Üniversitesi Sinema Topluluğu</b><span>3 yıl</span></li>
+          <li><b>Organizasyon Lead — Google Developer Group on Campus TEDÜ</b><span>2 yıl · etkinlik planlama, ekip koordinasyonu, sponsor ilişkileri</span></li>
+          <li><b>Gönüllü — LÖSEV (Lösemili Çocuklar Vakfı)</b><span>2024 – 2026</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="terminal">
+  <div class="wrap">
+    <div class="sh"><h2>Terminal</h2><p>bir komut yaz ya da aşağıdakilere tıkla</p></div>
+    <div class="win term">
+      <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">sude@portfolyo: ~</span></div>
+      <div class="out" id="out" aria-live="polite"></div>
+      <form id="tf"><span class="prompt">sude@portfolyo:~$</span><input id="tin" autocomplete="off" spellcheck="false" aria-label="Komut" placeholder="help"></form>
+      <div class="chips" id="chips"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="iletisim">
+  <div class="wrap contact">
+    <div>
+      <h2>Bir merhaba yaz.</h2>
+      <p class="say">Staj ve proje fırsatları için bana e-posta ya da LinkedIn üzerinden ulaşabilirsiniz.</p>
+      <div class="btns" style="margin-top:0"><a class="btn main" href="mailto:sudebegumyksl@gmail.com">mail_gonder()</a></div>
+    </div>
+    <div class="clist">
+      <a href="mailto:sudebegumyksl@gmail.com"><span class="key">e-posta</span><span>sudebegumyksl@gmail.com</span></a>
+      <a href="https://www.linkedin.com/in/sude-begum-yuksel-9127b8324"><span class="key">linkedin</span><span>linkedin.com/in/sude-begum-yuksel-9127b8324</span></a>
+      <a href="https://github.com/sudebegumyksl"><span class="key">github</span><span>github.com/sudebegumyksl</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Sude Begüm Yüksel</span><span>made with ☕ &amp; TypeScript · Ankara</span></div></footer>
+
+<script>
+{
+document.documentElement.classList.add("js");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+/* editor tabs */
+const files=[
+document.getElementById("src").innerHTML,
+`{
+  <span class="f">"dil"</span>: [<span class="s">"TypeScript"</span>, <span class="s">"JavaScript"</span>, <span class="s">"Java"</span>, <span class="s">"C#"</span>, <span class="s">"Python"</span>, <span class="s">"SQL"</span>],
+  <span class="f">"web"</span>: [<span class="s">"Next.js"</span>, <span class="s">"React"</span>, <span class="s">"Node.js"</span>, <span class="s">"Tailwind"</span>],
+  <span class="f">"veritabani"</span>: [<span class="s">"PostgreSQL"</span>, <span class="s">"MySQL"</span>, <span class="s">"Prisma"</span>],
+  <span class="f">"test"</span>: [<span class="s">"Playwright"</span>, <span class="s">"Manuel test"</span>],
+  <span class="f">"araclar"</span>: [<span class="s">"Git"</span>, <span class="s">"Docker"</span>, <span class="s">"Auth.js"</span>],
+  <span class="f">"ai"</span>: [<span class="s">"Claude Code"</span>, <span class="s">"Codex"</span>, <span class="s">"Copilot"</span>]
+}`,
+`<span class="k"># Merhaba, ben Sude</span>
+
+<span class="c">Bilgisayar mühendisliği öğrencisiyim.</span>
+<span class="c">Farklı alanları deneyerek öğreniyorum.</span>
+
+<span class="n">-</span> Şu an: stajyer @ BCS-IT GmbH
+<span class="n">-</span> Yan proje: hizliokuyabilirsin.com
+<span class="n">-</span> Topluluk: GDG on Campus TEDÜ
+<span class="n">-</span> Yeni alanlara: <span class="s">her zaman açık</span>`
+];
+const src=document.getElementById("src"),ln=document.getElementById("ln");
+const setLines=()=>{const n=src.textContent.split("\n").length;ln.textContent=Array.from({length:n},(_,i)=>i+1).join("\n")};
+const showFile=i=>{src.innerHTML=files[i]+'<span class="blink"></span>';setLines();document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.f==i))};
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>showFile(+t.dataset.f)));
+showFile(0);
+
+/* typed role */
+const roles=["Bilgisayar mühendisliği öğrencisi","Web geliştirme","Test otomasyonu","Eğitim teknolojileri","Yeni alanlara açık"];
+const typed=document.getElementById("typed");
+if(!reduce){let r=0,c=roles[0].length,del=true;const tick=()=>{const w=roles[r];if(del){c--;if(c<=0){del=false;r=(r+1)%roles.length}}else{c++;if(c>=roles[r].length){del=true;setTimeout(tick,1600);typed.textContent=roles[r];return}}typed.textContent=roles[r].slice(0,Math.max(c,0));setTimeout(tick,del?38:70)};setTimeout(tick,2000)}
+
+/* package.json */
+const deps=[["programlama","TypeScript, JavaScript, Java (OOP), C#, C, Python, SQL"],["web","Next.js (App Router), React, Node.js, Tailwind CSS, HTML & CSS"],["veritabani","PostgreSQL, MySQL, MS SQL, Prisma ORM, ER modelleme"],["test","Manuel test, senaryo yazımı, regresyon, hata raporlama, Playwright"],["araclar","Git & GitHub, Docker, NextAuth / Auth.js, UML"],["surec","Scrum / Agile"],["yapay-zeka","Claude, Claude Code, ChatGPT, Codex, GitHub Copilot"]];
+const pl=[['{',''],['<span class="f">"name"</span>: <span class="s">"sude-begum-yuksel"</span>,','ind'],['<span class="f">"version"</span>: <span class="s">"4.0.0-ogrenci"</span>,','ind'],['<span class="f">"dependencies"</span>: {','ind']];
+deps.forEach(([k,v],i)=>pl.push([`<span class="f">"${k}"</span>: <span class="s">"${esc(v)}"</span>${i<deps.length-1?",":""}`,'ind2']));
+pl.push(['}','ind'],['}','']);
+document.getElementById("pkg").innerHTML=pl.map(([h,c],i)=>`<div class="row"><span class="ln">${i+1}</span><span class="${c}">${h}</span></div>`).join("");
+
+/* test runner */
+const suites=[
+["deneyim",["Next.js 15 ve TypeScript ile rol bazlı Internship CRM geliştirdi","Prisma ile 7 aşamalı aday akışını modelledi","Salevali'de fonksiyonel ve regresyon testleri yürütüyor","Playwright ile E2E test otomasyonu yazıyor"]],
+["projeler",["Canlıdaki bir eğitim platformunu geliştiriyor","Multi-tenant SaaS için RBAC ve güvenlik katmanı kurdu","Normalize bir MS SQL şeması tasarladı"]],
+["ekip",["Scrum toplantılarında aktif","3 yıl sinema topluluğu başkanlığı","2 yıl GDG organizasyon lead'liği"]]
+];
+const total=suites.reduce((a,s)=>a+s[1].length,0);
+const box=document.getElementById("suites"),passTxt=document.getElementById("passTxt"),barI=document.getElementById("barI");
+box.innerHTML=suites.map(([n,ts])=>`<div class="suite"><h3>${n}.spec <small>${ts.length} test</small></h3>${ts.map(t=>`<div class="test">${esc(t)}</div>`).join("")}</div>`).join("");
+const tests=[...box.querySelectorAll(".test")];
+const done=n=>{passTxt.textContent=`${n}/${total} passed`;barI.style.width=(n/total*100)+"%"};
+let timer;
+const runTests=()=>{clearInterval(timer);if(reduce){tests.forEach(t=>t.classList.remove("wait"));done(total);return}tests.forEach(t=>t.classList.add("wait"));let i=0;done(0);timer=setInterval(()=>{tests[i].classList.remove("wait");i++;done(i);if(i>=tests.length)clearInterval(timer)},140)};
+done(total);
+document.getElementById("rerun").addEventListener("click",runTests);
+const sec=document.getElementById("yetkinlikler");
+if("IntersectionObserver" in window&&!reduce){const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){runTests();io.disconnect()}},{threshold:.35});io.observe(sec)}
+
+/* terminal */
+const out=document.getElementById("out"),tin=document.getElementById("tin");
+const L='<a href="https://www.linkedin.com/in/sude-begum-yuksel-9127b8324">linkedin.com/in/sude-begum-yuksel-9127b8324</a>';
+const cmds={
+help:()=>"Komutlar: whoami, deneyim, projeler, stack, iletisim, egitim, kahve, sudo, clear",
+whoami:()=>"Sude Begüm Yüksel — TED Üniversitesi Bilgisayar Mühendisliği 4. sınıf\nYan dal: Öğrenme Mühendisliği · Ankara",
+deneyim:()=>"2026–  QA Stajyeri @ BCS-IT GmbH (Salevali, Playwright)\n2026    Developer Stajyeri @ BCS-IT GmbH (Internship CRM)\n2024–25 Dijital Platform Ekibi @ Ankara Üni. Teknokent",
+projeler:()=>'hizli-okuyabilirsin  ● canlıda  <a href="https://hizliokuyabilirsin.com">hizliokuyabilirsin.com</a>\ninterncrm            ● canlıda  <a href="https://interncrm.com">interncrm.com</a>\nfinansmax            multi-tenant SaaS finans platformu\ncampus-events        MS SQL veritabanı tasarımı',
+stack:()=>"TypeScript · Next.js · React · Node.js · PostgreSQL · MySQL · Prisma · Docker · Playwright",
+egitim:()=>"TED Üniversitesi — Bilgisayar Müh. (lisans) + Öğrenme Müh. (yan dal)\nSertifikalar: HKUST/Coursera, Udemy Playwright, Ankyra Java",
+iletisim:()=>"e-posta  sudebegumyksl@gmail.com\nlinkedin "+L+'\ngithub   <a href="https://github.com/sudebegumyksl">github.com/sudebegumyksl</a>',
+kahve:()=>"☕ Kahve hazırlanıyor... %100\nError 418: I'm a teapot. Çay da olur.",
+sudo:()=>"Bu işlem için yetkin yok. Ama staj teklifi gönderebilirsin :)",
+clear:()=>{out.innerHTML="";return null}
+};
+const print=(html,cls)=>{const d=document.createElement("div");if(cls)d.className=cls;d.innerHTML=html;out.appendChild(d);out.scrollTop=out.scrollHeight};
+const run=raw=>{const c=raw.trim().toLowerCase();if(!c)return;print(`<span class="prompt">sude@portfolyo:~$</span> ${esc(raw)}`);const f=cmds[c]||cmds[c.replace(/^sudo .*/,"sudo")];if(!f){print(`komut bulunamadı: ${esc(c)} — 'help' yaz`);return}const r=f();if(r!==null)print(r);print("&nbsp;")};
+print('Merhaba! Portfolyo terminaline hoş geldin. Başlamak için <span class="s">help</span> yaz.');
+print("&nbsp;");
+run("whoami");
+document.getElementById("tf").addEventListener("submit",e=>{e.preventDefault();run(tin.value);tin.value=""});
+const chipList=["help","whoami","deneyim","projeler","stack","iletisim","kahve","clear"];
+const chips=document.getElementById("chips");
+chips.innerHTML=chipList.map(c=>`<button class="chip" type="button" data-c="${c}">${c}</button>`).join("");
+chips.addEventListener("click",e=>{const b=e.target.closest(".chip");if(b)run(b.dataset.c)});
+}
+</script>
+</body>
+</html>
