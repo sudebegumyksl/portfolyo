@@ -35,6 +35,12 @@ nav ul{display:flex;flex-wrap:wrap;gap:2px;list-style:none;margin:0;padding:0}
 nav ul a{display:block;padding:9px 11px;border-radius:8px;font:500 14px "JetBrains Mono",monospace;color:var(--mute);text-decoration:none}
 nav ul a:hover,nav ul a:focus-visible{background:var(--bar);color:var(--ink);outline:none}
 nav ul a span{color:var(--coral)}
+nav ul{margin-left:auto}
+.lang{display:flex;flex:none;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.lang button{font:700 12.5px "JetBrains Mono",monospace;color:var(--mute);background:transparent;border:0;min-width:42px;min-height:38px;padding:0 10px;cursor:pointer}
+.lang button+button{border-left:1px solid var(--line)}
+.lang button[aria-pressed=true]{background:var(--coral);color:#1a0f0d}
+.lang button:hover:not([aria-pressed=true]),.lang button:focus-visible{color:var(--ink);background:var(--bar);outline:none}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center;padding-block:clamp(40px,6vw,88px)}
 .hello{font:500 15px "JetBrains Mono",monospace;color:var(--mint);margin-bottom:16px}
 .hero h1{font-size:clamp(36px,4.4vw,58px);text-wrap:balance}
@@ -164,7 +170,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .stage{max-width:620px}
 }
 @media(max-width:600px){
-nav .wrap{flex-wrap:nowrap;gap:12px}
+nav .wrap{flex-wrap:wrap;gap:6px 12px;padding-block:8px}
+nav ul{order:3;flex:1 0 100%;margin-left:0}
+.lang{margin-left:auto}
 nav ul{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
 nav ul::-webkit-scrollbar{display:none}
 nav ul li{flex:none}
@@ -187,13 +195,16 @@ nav ul a{padding:8px 7px;font-size:13px}
   <div class="wrap">
     <a class="logo" href="#top">sude<b>.</b>yuksel</a>
     <ul>
-      <li><a href="#hakkimda"><span>#</span>hakkımda</a></li>
-      <li><a href="#deneyim"><span>#</span>deneyim</a></li>
-      <li><a href="#projeler"><span>#</span>projeler</a></li>
+      <li><a href="#hakkimda" data-i="n1"><span>#</span>hakkımda</a></li>
+      <li><a href="#deneyim" data-i="n2"><span>#</span>deneyim</a></li>
+      <li><a href="#projeler" data-i="n3"><span>#</span>projeler</a></li>
       <li><a href="#yetkinlikler"><span>#</span>stack</a></li>
       <li><a href="#terminal"><span>#</span>terminal</a></li>
-      <li><a href="#iletisim"><span>#</span>iletişim</a></li>
+      <li><a href="#iletisim" data-i="n6"><span>#</span>iletişim</a></li>
     </ul>
+    <div class="lang" role="group" aria-label="Dil / Language / Sprache">
+      <button type="button" data-l="tr" aria-pressed="true">TR</button><button type="button" data-l="en" aria-pressed="false">EN</button><button type="button" data-l="de" aria-pressed="false">DE</button>
+    </div>
   </div>
 </nav>
 
@@ -201,12 +212,12 @@ nav ul a{padding:8px 7px;font-size:13px}
 <section class="hero" id="top">
   <div class="wrap">
     <div>
-      <p class="hello">&gt; console.log("Merhaba dünya!")</p>
-      <h1>Ben <span class="hl">Sude</span>,<br>öğreniyor, deniyor, üretiyorum.</h1>
+      <p class="hello" data-i="hello">&gt; console.log("Merhaba dünya!")</p>
+      <h1 data-i="h1">Ben <span class="hl">Sude</span>,<br>öğreniyor, deniyor, üretiyorum.</h1>
       <p class="role">// <span class="typed" id="typed">Bilgisayar mühendisliği öğrencisi</span><span class="car blink" aria-hidden="true"></span></p>
-      <p class="lead">TED Üniversitesi'nde Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. Almanya'da bir yazılım şirketinde geliştirici ve QA stajyeri olarak çalıştım; şu anda canlıda yayında olan bir hızlı okuma eğitim platformu geliştiriyorum.</p>
+      <p class="lead" data-i="lead">TED Üniversitesi'nde Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. Almanya'da bir yazılım şirketinde geliştirici ve QA stajyeri olarak çalıştım; şu anda canlıda yayında olan bir hızlı okuma eğitim platformu geliştiriyorum.</p>
       <div class="btns">
-        <a class="btn main" href="#iletisim">iletisime_gec()</a>
+        <a class="btn main" href="#iletisim" data-i="cta">iletisime_gec()</a>
         <a class="btn" href="https://github.com/sudebegumyksl">GitHub ↗</a>
         <a class="btn" href="https://www.linkedin.com/in/sude-begum-yuksel-9127b8324">LinkedIn ↗</a>
       </div>
@@ -241,25 +252,25 @@ nav ul a{padding:8px 7px;font-size:13px}
 
 <section class="band" id="hakkimda">
   <div class="wrap">
-    <div class="sh"><h2>Hakkımda</h2><p>cat hakkimda.md</p></div>
+    <div class="sh"><h2 data-i="abH">Hakkımda</h2><p data-i="abC">cat hakkimda.md</p></div>
     <div class="about">
       <div class="win">
-        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">hakkimda.md</span></div>
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle" data-i="abF">hakkimda.md</span></div>
         <div class="txt">
-          <p>TED Üniversitesi Bilgisayar Mühendisliği (İngilizce) 4. sınıf öğrencisiyim ve Öğrenme Mühendisliği (İngilizce) yan dalı yapıyorum.</p>
-          <p>Full-stack geliştirme ve yazılım test alanlarında deneyim kazandım. BCS-IT GmbH'de önce geliştirici olarak bir staj yönetim sistemi geliştirdim; şimdi aynı şirkette QA stajyeri olarak manuel testler ve Playwright ile test otomasyonu yürütüyorum.</p>
-          <p>Henüz tek bir alan seçmedim; farklı teknoloji alanlarını keşfetmeye ve kendimi sürekli geliştirmeye açığım.</p>
+          <p data-i="ab1">TED Üniversitesi Bilgisayar Mühendisliği (İngilizce) 4. sınıf öğrencisiyim ve Öğrenme Mühendisliği (İngilizce) yan dalı yapıyorum.</p>
+          <p data-i="ab2">Full-stack geliştirme ve yazılım test alanlarında deneyim kazandım. BCS-IT GmbH'de önce geliştirici olarak bir staj yönetim sistemi geliştirdim; şimdi aynı şirkette QA stajyeri olarak manuel testler ve Playwright ile test otomasyonu yürütüyorum.</p>
+          <p data-i="ab3">Henüz tek bir alan seçmedim; farklı teknoloji alanlarını keşfetmeye ve kendimi sürekli geliştirmeye açığım.</p>
         </div>
       </div>
       <div class="win">
         <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">.env.profile</span></div>
         <ul class="kv">
-          <li><span class="key">KONUM</span><span>Yenimahalle, Ankara</span></li>
-          <li><span class="key">OKUL</span><span>TED Üniversitesi</span></li>
-          <li><span class="key">DİLLER</span><span>TR · EN (B2) · DE (A2)</span></li>
-          <li><span class="key">EKİP</span><span>Scrum / Agile</span></li>
-          <li><span class="key">TOPLULUK</span><span>GDG on Campus TEDÜ</span></li>
-          <li><span class="key">EHLİYET</span><span>B sınıfı</span></li>
+          <li><span class="key" data-i="kv1">KONUM</span><span>Yenimahalle, Ankara</span></li>
+          <li><span class="key" data-i="kv2">OKUL</span><span data-i="ted">TED Üniversitesi</span></li>
+          <li><span class="key" data-i="kv3">DİLLER</span><span>TR · EN (B2) · DE (A2)</span></li>
+          <li><span class="key" data-i="kv4">EKİP</span><span>Scrum / Agile</span></li>
+          <li><span class="key" data-i="kv5">TOPLULUK</span><span>GDG on Campus TEDÜ</span></li>
+          <li><span class="key" data-i="kv6">EHLİYET</span><span data-i="clsB">B sınıfı</span></li>
         </ul>
       </div>
     </div>
@@ -268,34 +279,34 @@ nav ul a{padding:8px 7px;font-size:13px}
 
 <section class="band" id="deneyim">
   <div class="wrap">
-    <div class="sh"><h2>Deneyim</h2><p>git log --kariyer</p></div>
+    <div class="sh"><h2 data-i="exH">Deneyim</h2><p data-i="exC">git log --kariyer</p></div>
     <div class="win">
-      <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">~/kariyer — git log</span></div>
+      <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle" data-i="exF">~/kariyer — git log</span></div>
       <div class="log">
         <article class="commit now">
           <div class="graph"><i></i></div>
           <div>
-            <div class="meta"><span class="hash">HEAD</span><span class="br">(qa-stajyeri)</span><span>Eyl. 2026 – Devam ediyor</span></div>
-            <h3>Yazılım Test Stajyeri (QA)</h3>
-            <p class="org">BCS-IT GmbH, Almanya</p>
+            <div class="meta"><span class="hash">HEAD</span><span class="br" data-i="brQ">(qa-stajyeri)</span><span data-i="dQ">Eyl. 2026 – Devam ediyor</span></div>
+            <h3 data-i="jQ">Yazılım Test Stajyeri (QA)</h3>
+            <p class="org" data-i="oB">BCS-IT GmbH, Almanya</p>
             <ul class="pts">
-              <li>Salevali projesinde test senaryoları hazırlıyor, fonksiyonel ve regresyon testleri yürütüyor, hataları raporlayıp takip ediyorum.</li>
-              <li>Playwright eğitimi alarak uçtan uca (E2E) test otomasyonu geliştiriyorum.</li>
-              <li>Scrum ekibinde sprint planlama, daily stand-up, sprint review ve retrospektif toplantılarına katılıyorum.</li>
+              <li data-i="q1">Salevali projesinde test senaryoları hazırlıyor, fonksiyonel ve regresyon testleri yürütüyor, hataları raporlayıp takip ediyorum.</li>
+              <li data-i="q2">Playwright eğitimi alarak uçtan uca (E2E) test otomasyonu geliştiriyorum.</li>
+              <li data-i="q3">Scrum ekibinde sprint planlama, daily stand-up, sprint review ve retrospektif toplantılarına katılıyorum.</li>
             </ul>
           </div>
         </article>
         <article class="commit">
           <div class="graph"><i></i></div>
           <div>
-            <div class="meta"><span class="br">(developer-stajyeri)</span><span>Haz. 2026 – Tem. 2026</span></div>
-            <h3>Yazılım Geliştirme Stajyeri</h3>
-            <p class="org">BCS-IT GmbH, Almanya · <a href="https://interncrm.com" style="color:var(--coral)">interncrm.com ↗</a></p>
+            <div class="meta"><span class="br" data-i="brD">(developer-stajyeri)</span><span data-i="dD">Haz. 2026 – Tem. 2026</span></div>
+            <h3 data-i="jD">Yazılım Geliştirme Stajyeri</h3>
+            <p class="org" data-i="oB2">BCS-IT GmbH, Almanya · <a href="https://interncrm.com" style="color:var(--coral)">interncrm.com ↗</a></p>
             <ul class="pts">
-              <li>Excel tabanlı takibin yerini alan, mentor–mentee ve staj adayı süreçlerini yöneten Internship CRM sistemini geliştirdim.</li>
-              <li>Next.js 15, React 19, TypeScript ve Tailwind CSS ile admin, mentor ve mentee için rol bazlı dashboard'lar oluşturdum.</li>
-              <li>MySQL veritabanını Prisma ORM ile modelledim; 7 aşamalı aday akışı, görüşme kayıtları ve filtreleme geliştirdim.</li>
-              <li>NextAuth (JWT) kimlik doğrulama, e-posta daveti ve node-cron hatırlatmaları kurdum; Docker ile paketleyip 3 dil desteği ekledim.</li>
+              <li data-i="d1">Excel tabanlı takibin yerini alan, mentor–mentee ve staj adayı süreçlerini yöneten Internship CRM sistemini geliştirdim.</li>
+              <li data-i="d2">Next.js 15, React 19, TypeScript ve Tailwind CSS ile admin, mentor ve mentee için rol bazlı dashboard'lar oluşturdum.</li>
+              <li data-i="d3">MySQL veritabanını Prisma ORM ile modelledim; 7 aşamalı aday akışı, görüşme kayıtları ve filtreleme geliştirdim.</li>
+              <li data-i="d4">NextAuth (JWT) kimlik doğrulama, e-posta daveti ve node-cron hatırlatmaları kurdum; Docker ile paketleyip 3 dil desteği ekledim.</li>
             </ul>
           </div>
         </article>
@@ -303,10 +314,10 @@ nav ul a{padding:8px 7px;font-size:13px}
           <div class="graph"><i></i></div>
           <div>
             <div class="meta"><span class="br">(teknokent)</span><span>2024 – 2025</span></div>
-            <h3>Dijital Platform Ekibi (Yarı Zamanlı)</h3>
-            <p class="org">Eğitim Yazılımı Girişimi · Ankara Üniversitesi Teknokent</p>
+            <h3 data-i="jT">Dijital Platform Ekibi (Yarı Zamanlı)</h3>
+            <p class="org" data-i="oT">Eğitim Yazılımı Girişimi · Ankara Üniversitesi Teknokent</p>
             <ul class="pts">
-              <li>Eğitim yazılımı geliştiren bir girişimin dijital platformunda geliştirme ve iyileştirme çalışmalarında yer aldım; çalışmayı ders programıyla eş zamanlı yürüttüm.</li>
+              <li data-i="t1">Eğitim yazılımı geliştiren bir girişimin dijital platformunda geliştirme ve iyileştirme çalışmalarında yer aldım; çalışmayı ders programıyla eş zamanlı yürüttüm.</li>
             </ul>
           </div>
         </article>
@@ -317,38 +328,38 @@ nav ul a{padding:8px 7px;font-size:13px}
 
 <section class="band" id="projeler">
   <div class="wrap">
-    <div class="sh"><h2>Projeler</h2><p>ls ~/projeler</p></div>
+    <div class="sh"><h2 data-i="prH">Projeler</h2><p data-i="prC">ls ~/projeler</p></div>
     <div class="repos">
       <article class="repo big">
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="top"><h3><span class="slash">sude /</span> hizli-okuyabilirsin</h3><span class="pill live">canlıda</span></div>
-          <p class="d">Çocuk ve yetişkinler için okuma akıcılığını ve okuduğunu anlamayı geliştiren hızlı okuma ve anlama programı. Ekip arkadaşımla birlikte geliştiriyorum.</p>
+          <div class="top"><h3><span class="slash">sude /</span> hizli-okuyabilirsin</h3><span class="pill live" data-i="live">canlıda</span></div>
+          <p class="d" data-i="hD">Çocuk ve yetişkinler için okuma akıcılığını ve okuduğunu anlamayı geliştiren hızlı okuma ve anlama programı. Ekip arkadaşımla birlikte geliştiriyorum.</p>
           <a class="url" href="https://hizliokuyabilirsin.com">hizliokuyabilirsin.com ↗</a>
-          <p class="langs"><span>2026 – Devam ediyor</span></p>
+          <p class="langs"><span data-i="hY">2026 – Devam ediyor</span></p>
         </div>
         <ul class="pts">
-          <li>KEİS, Akıllı Kurs, Paragraf ve ödev modüllerinde özellik geliştirip hataları giderdim.</li>
-          <li>Çok kademeli hesap hiyerarşisinde kurum bazlı modül kısıtlama kurallarını tasarladım.</li>
-          <li>Ortak egzersiz ses sistemi, avatarlar ve zayıf internet iyileştirmeleri geliştirdim.</li>
-          <li>Admin panelini test edip hata raporladım; sürümleri yedekli ve geri alınabilir yayınladım.</li>
-          <li>Hesap bazlı Türkçe/İngilizce dil desteğini tüm sisteme ekleme çalışmasını yürütüyorum.</li>
+          <li data-i="h1b">KEİS, Akıllı Kurs, Paragraf ve ödev modüllerinde özellik geliştirip hataları giderdim.</li>
+          <li data-i="h2b">Çok kademeli hesap hiyerarşisinde kurum bazlı modül kısıtlama kurallarını tasarladım.</li>
+          <li data-i="h3b">Ortak egzersiz ses sistemi, avatarlar ve zayıf internet iyileştirmeleri geliştirdim.</li>
+          <li data-i="h4b">Admin panelini test edip hata raporladım; sürümleri yedekli ve geri alınabilir yayınladım.</li>
+          <li data-i="h5b">Hesap bazlı Türkçe/İngilizce dil desteğini tüm sisteme ekleme çalışmasını yürütüyorum.</li>
         </ul>
       </article>
       <article class="repo">
-        <div class="top"><h3><span class="slash">bcs-it /</span> interncrm</h3><span class="pill live">canlıda</span></div>
-        <p class="d">Staj ve mentorluk programlarını başvurudan işe alıma kadar yöneten platform: mentee, mentor ve partner şirket için ayrı görünümler, aşama bazlı aday akışı ve görüşme takibi. Developer stajımda ekiple geliştirdiğimiz, açık kaynak (AGPL-3.0) bir proje; İngilizce, Türkçe ve Almanca destekli.</p>
+        <div class="top"><h3><span class="slash">bcs-it /</span> interncrm</h3><span class="pill live" data-i="live">canlıda</span></div>
+        <p class="d" data-i="iD">Staj ve mentorluk programlarını başvurudan işe alıma kadar yöneten platform: mentee, mentor ve partner şirket için ayrı görünümler, aşama bazlı aday akışı ve görüşme takibi. Developer stajımda ekiple geliştirdiğimiz, açık kaynak (AGPL-3.0) bir proje; İngilizce, Türkçe ve Almanca destekli.</p>
         <a class="url" href="https://interncrm.com">interncrm.com ↗</a>
         <p class="langs"><span style="--c:#3178c6">TypeScript</span><span style="--c:#e8ebf1">Next.js</span><span style="--c:#4479a1">MySQL</span><span style="--c:#7fe0b6">Prisma</span><span style="--c:#2496ed">Docker</span></p>
       </article>
       <article class="repo">
         <div class="top"><h3><span class="slash">sude /</span> finansmax</h3><span class="pill">2026</span></div>
-        <p class="d">Faturalama, çek takibi, otomatik hatırlatma ve veri içe/dışa aktarma içeren çok kiracılı (multi-tenant) SaaS finans platformu. Rol bazlı yetkilendirme, kiracı bazlı veri izolasyonu, CSRF korumalı güvenlik katmanı ve Playwright ile uçtan uca testler.</p>
+        <p class="d" data-i="fD">Faturalama, çek takibi, otomatik hatırlatma ve veri içe/dışa aktarma içeren çok kiracılı (multi-tenant) SaaS finans platformu. Rol bazlı yetkilendirme, kiracı bazlı veri izolasyonu, CSRF korumalı güvenlik katmanı ve Playwright ile uçtan uca testler.</p>
         <p class="langs"><span style="--c:#3178c6">TypeScript</span><span style="--c:#e8ebf1">Next.js</span><span style="--c:#4a90c8">PostgreSQL</span><span style="--c:#7fe0b6">Prisma</span><span style="--c:#2496ed">Docker</span><span style="--c:#ff7b6b">Playwright</span></p>
       </article>
       <article class="repo">
         <div class="top"><h3><span class="slash">sude /</span> campus-events</h3><span class="pill">2025</span></div>
-        <p class="d">Kampüs etkinlikleri için Event, User, Location ve Organizer varlıklarını içeren ER diyagramı ve 1-N / N-N ilişkili, normalize edilmiş bir veritabanı şeması.</p>
-        <p class="langs"><span style="--c:#cc2927">MS SQL Server</span><span style="--c:#ffd47a">SQL</span><span style="--c:#b7a6ff">ER modelleme</span></p>
+        <p class="d" data-i="cD">Kampüs etkinlikleri için Event, User, Location ve Organizer varlıklarını içeren ER diyagramı ve 1-N / N-N ilişkili, normalize edilmiş bir veritabanı şeması.</p>
+        <p class="langs"><span style="--c:#cc2927">MS SQL Server</span><span style="--c:#ffd47a">SQL</span><span style="--c:#b7a6ff" data-i="erm">ER modelleme</span></p>
       </article>
     </div>
   </div>
@@ -356,18 +367,18 @@ nav ul a{padding:8px 7px;font-size:13px}
 
 <section class="band" id="yetkinlikler">
   <div class="wrap">
-    <div class="sh"><h2>Stack ve testler</h2><p>npx playwright test sude</p></div>
+    <div class="sh"><h2 data-i="stH">Stack ve testler</h2><p>npx playwright test sude</p></div>
     <div class="cols">
       <div class="win">
         <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">package.json</span></div>
         <div class="pkg" id="pkg"></div>
       </div>
       <div class="win">
-        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">sude.spec.ts — test raporu</span></div>
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle" data-i="stF">sude.spec.ts — test raporu</span></div>
         <div class="run">
           <p class="cmd">$ <b>npx playwright test sude.spec.ts</b></p>
           <div id="suites"></div>
-          <div class="sum"><span class="pass" id="passTxt"></span><div class="bar"><i id="barI"></i></div><button class="rerun" id="rerun" type="button">↻ tekrar çalıştır</button></div>
+          <div class="sum"><span class="pass" id="passTxt"></span><div class="bar"><i id="barI"></i></div><button class="rerun" id="rerun" type="button" data-i="rerun">↻ tekrar çalıştır</button></div>
         </div>
       </div>
     </div>
@@ -376,25 +387,25 @@ nav ul a{padding:8px 7px;font-size:13px}
 
 <section class="band">
   <div class="wrap">
-    <div class="sh"><h2>Eğitim ve topluluk</h2><p>cat egitim.yml</p></div>
+    <div class="sh"><h2 data-i="edH">Eğitim ve topluluk</h2><p data-i="edC">cat egitim.yml</p></div>
     <div class="cols">
       <div class="win">
-        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">egitim.yml</span></div>
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle" data-i="edF">egitim.yml</span></div>
         <ul class="list">
-          <li><b>TED Üniversitesi — Bilgisayar Mühendisliği (İngilizce)</b><span>lisans · 2023 – devam ediyor</span></li>
-          <li><b>TED Üniversitesi — Öğrenme Mühendisliği (İngilizce)</b><span>yan dal · 2026 – devam ediyor</span></li>
-          <li><b>Cahit Elginkan Anadolu Lisesi</b><span>2018 – 2022</span></li>
-          <li><b>Software Engineering (3 kurs) — HKUST, Coursera</b><span>sertifika · 2026</span></li>
-          <li><b>Playwright: Web Automation Testing From Zero to Hero — Udemy</b><span>sertifika · 2026</span></li>
-          <li><b>Sıfırdan Komple Java Geliştirici Eğitimi (42 saat) — Ankyra Analytics</b><span>sertifika · 2025</span></li>
+          <li data-i="e1"><b>TED Üniversitesi — Bilgisayar Mühendisliği (İngilizce)</b><span>lisans · 2023 – devam ediyor</span></li>
+          <li data-i="e2"><b>TED Üniversitesi — Öğrenme Mühendisliği (İngilizce)</b><span>yan dal · 2026 – devam ediyor</span></li>
+          <li data-i="e3"><b>Cahit Elginkan Anadolu Lisesi</b><span>2018 – 2022</span></li>
+          <li data-i="e4"><b>Software Engineering (3 kurs) — HKUST, Coursera</b><span>sertifika · 2026</span></li>
+          <li data-i="e5"><b>Playwright: Web Automation Testing From Zero to Hero — Udemy</b><span>sertifika · 2026</span></li>
+          <li data-i="e6"><b>Sıfırdan Komple Java Geliştirici Eğitimi (42 saat) — Ankyra Analytics</b><span>sertifika · 2025</span></li>
         </ul>
       </div>
       <div class="win">
-        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">topluluk.yml</span></div>
+        <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle" data-i="coF">topluluk.yml</span></div>
         <ul class="list">
-          <li><b>Başkan — TED Üniversitesi Sinema Topluluğu</b><span>3 yıl</span></li>
-          <li><b>Organizasyon Lead — Google Developer Group on Campus TEDÜ</b><span>2 yıl · etkinlik planlama, ekip koordinasyonu, sponsor ilişkileri</span></li>
-          <li><b>Gönüllü — LÖSEV (Lösemili Çocuklar Vakfı)</b><span>2024 – 2026</span></li>
+          <li data-i="c1"><b>Başkan — TED Üniversitesi Sinema Topluluğu</b><span>3 yıl</span></li>
+          <li data-i="c2"><b>Organizasyon Lead — Google Developer Group on Campus TEDÜ</b><span>2 yıl · etkinlik planlama, ekip koordinasyonu, sponsor ilişkileri</span></li>
+          <li data-i="c3"><b>Gönüllü — LÖSEV (Lösemili Çocuklar Vakfı)</b><span>2024 – 2026</span></li>
         </ul>
       </div>
     </div>
@@ -403,7 +414,7 @@ nav ul a{padding:8px 7px;font-size:13px}
 
 <section class="band" id="terminal">
   <div class="wrap">
-    <div class="sh"><h2>Terminal</h2><p>bir komut yaz ya da aşağıdakilere tıkla</p></div>
+    <div class="sh"><h2>Terminal</h2><p data-i="tmC">bir komut yaz ya da aşağıdakilere tıkla</p></div>
     <div class="win term">
       <div class="wbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="wtitle">sude@portfolyo: ~</span></div>
       <div class="out" id="out" aria-live="polite"></div>
@@ -416,12 +427,12 @@ nav ul a{padding:8px 7px;font-size:13px}
 <section class="band" id="iletisim">
   <div class="wrap contact">
     <div>
-      <h2>Bir merhaba yaz.</h2>
-      <p class="say">Staj ve proje fırsatları için bana e-posta ya da LinkedIn üzerinden ulaşabilirsiniz.</p>
-      <div class="btns" style="margin-top:0"><a class="btn main" href="mailto:sudebegumyksl@gmail.com">mail_gonder()</a></div>
+      <h2 data-i="ctH">Bir merhaba yaz.</h2>
+      <p class="say" data-i="ctS">Staj ve proje fırsatları için bana e-posta ya da LinkedIn üzerinden ulaşabilirsiniz.</p>
+      <div class="btns" style="margin-top:0"><a class="btn main" href="mailto:sudebegumyksl@gmail.com" data-i="ctB">mail_gonder()</a></div>
     </div>
     <div class="clist">
-      <a href="mailto:sudebegumyksl@gmail.com"><span class="key">e-posta</span><span>sudebegumyksl@gmail.com</span></a>
+      <a href="mailto:sudebegumyksl@gmail.com"><span class="key" data-i="ctK">e-posta</span><span>sudebegumyksl@gmail.com</span></a>
       <a href="https://www.linkedin.com/in/sude-begum-yuksel-9127b8324"><span class="key">linkedin</span><span>linkedin.com/in/sude-begum-yuksel-9127b8324</span></a>
       <a href="https://github.com/sudebegumyksl"><span class="key">github</span><span>github.com/sudebegumyksl</span></a>
     </div>
@@ -432,94 +443,172 @@ nav ul a{padding:8px 7px;font-size:13px}
 <footer><div class="wrap"><span>© 2026 Sude Begüm Yüksel</span><span>made with ☕ &amp; TypeScript · Ankara</span></div></footer>
 
 <script>
+const I18N={"en": {"n1": "<span>#</span>about", "n2": "<span>#</span>experience", "n3": "<span>#</span>projects", "n6": "<span>#</span>contact", "hello": "&gt; console.log(\"Hello world!\")", "h1": "I'm <span class=\"hl\">Sude</span>,<br>learning, trying, building.", "lead": "I'm a 4th-year Computer Engineering student at TED University. I've worked as a developer and QA intern at a software company in Germany, and I'm currently building a live speed-reading education platform.", "cta": "contact_me()", "abH": "About me", "abC": "cat about.md", "abF": "about.md", "ab1": "I'm a 4th-year Computer Engineering student at TED University (taught in English), with a minor in Learning Engineering (taught in English).", "ab2": "I've gained experience in full-stack development and software testing. At BCS-IT GmbH I first built an internship management system as a developer; now, as a QA intern at the same company, I run manual tests and test automation with Playwright.", "ab3": "I haven't settled on a single field yet; I'm open to exploring different areas of technology and to keep growing.", "kv1": "LOCATION", "kv2": "SCHOOL", "kv3": "LANGUAGES", "kv4": "TEAMWORK", "kv5": "COMMUNITY", "kv6": "LICENCE", "ted": "TED University", "clsB": "Class B", "exH": "Experience", "exC": "git log --career", "exF": "~/career — git log", "brQ": "(qa-intern)", "brD": "(developer-intern)", "dQ": "Sep 2026 – Present", "dD": "Jun 2026 – Jul 2026", "jQ": "Software Test Intern (QA)", "jD": "Software Development Intern", "jT": "Digital Platform Team (Part-time)", "oB": "BCS-IT GmbH, Germany", "oB2": "BCS-IT GmbH, Germany · <a href=\"https://interncrm.com\" style=\"color:var(--coral)\">interncrm.com ↗</a>", "oT": "Ed-tech startup · Ankara University Technopark", "q1": "On the Salevali project I write test cases, run functional and regression tests, and report and track bugs.", "q2": "After Playwright training, I'm building end-to-end (E2E) test automation.", "q3": "In a Scrum team I take part in sprint planning, daily stand-ups, sprint reviews and retrospectives.", "d1": "I built Internship CRM, which replaced Excel-based tracking and manages mentor–mentee relationships and the internship candidate process.", "d2": "I created role-based dashboards for admins, mentors and mentees with Next.js 15, React 19, TypeScript and Tailwind CSS.", "d3": "I modelled the MySQL database with Prisma ORM and built a 7-stage candidate pipeline, interview records and filtering.", "d4": "I set up NextAuth (JWT) authentication, email invitations and node-cron reminders, packaged the app with Docker and added support for 3 languages.", "t1": "I worked on developing and improving the digital platform of an ed-tech startup, alongside my studies.", "prH": "Projects", "prC": "ls ~/projects", "live": "live", "hD": "A speed-reading and comprehension programme that helps children and adults read more fluently and understand what they read. I'm building it together with a teammate.", "hY": "2026 – present", "h1b": "I built features and fixed bugs in the KEİS, Akıllı Kurs (Smart Course), Paragraph and homework modules.", "h2b": "I designed institution-based module restriction rules within a multi-level account hierarchy.", "h3b": "I built a shared exercise sound system, avatars and improvements for weak internet connections.", "h4b": "I tested the admin panel and reported bugs, and shipped releases with backups and rollback options.", "h5b": "I'm working on adding account-based Turkish/English language support across the whole system.", "iD": "A platform that runs internship and mentoring programmes from application to hiring: separate views for mentees, mentors and partner companies, a stage-based candidate pipeline and meeting tracking. An open-source (AGPL-3.0) project we built as a team during my developer internship; available in English, Turkish and German.", "fD": "A multi-tenant SaaS finance platform with invoicing, cheque tracking, automatic reminders and data import/export. Role-based access control, tenant-level data isolation, a CSRF-protected security layer and end-to-end tests with Playwright.", "cD": "An ER diagram with Event, User, Location and Organizer entities, plus a normalised database schema with 1-N and N-N relationships for campus events.", "erm": "ER modelling", "stH": "Stack &amp; tests", "stF": "sude.spec.ts — test report", "rerun": "↻ run again", "edH": "Education &amp; community", "edC": "cat education.yml", "edF": "education.yml", "coF": "community.yml", "e1": "<b>TED University — Computer Engineering (taught in English)</b><span>bachelor · 2023 – present</span>", "e2": "<b>TED University — Learning Engineering (taught in English)</b><span>minor · 2026 – present</span>", "e3": "<b>Cahit Elginkan Anatolian High School</b><span>2018 – 2022</span>", "e4": "<b>Software Engineering (3 courses) — HKUST, Coursera</b><span>certificate · 2026</span>", "e5": "<b>Playwright: Web Automation Testing From Zero to Hero — Udemy</b><span>certificate · 2026</span>", "e6": "<b>Complete Java Developer Course from Scratch (42 hours) — Ankyra Analytics</b><span>certificate · 2025</span>", "c1": "<b>President — TED University Film Club</b><span>3 years</span>", "c2": "<b>Organization Lead — Google Developer Group on Campus TEDÜ</b><span>2 years · event planning, team coordination, sponsor relations</span>", "c3": "<b>Volunteer — LÖSEV (Foundation for Children with Leukaemia)</b><span>2024 – 2026</span>", "tmC": "type a command or click one below", "ctH": "Say hello.", "ctS": "For internship and project opportunities, you can reach me by email or on LinkedIn.", "ctB": "send_mail()", "ctK": "email"}, "de": {"n1": "<span>#</span>über-mich", "n2": "<span>#</span>erfahrung", "n3": "<span>#</span>projekte", "n6": "<span>#</span>kontakt", "hello": "&gt; console.log(\"Hallo Welt!\")", "h1": "Ich bin <span class=\"hl\">Sude</span>,<br>ich lerne, probiere, baue.", "lead": "Ich studiere Computer Engineering im 4. Jahr an der TED Universität. Ich habe als Entwicklerin und QA-Praktikantin bei einem Softwareunternehmen in Deutschland gearbeitet und entwickle derzeit eine live geschaltete Lernplattform für Schnelllesen.", "cta": "kontakt_aufnehmen()", "abH": "Über mich", "abC": "cat ueber-mich.md", "abF": "ueber-mich.md", "ab1": "Ich studiere Computer Engineering im 4. Jahr an der TED Universität (Unterrichtssprache Englisch) und belege das Nebenfach Learning Engineering (ebenfalls auf Englisch).", "ab2": "Ich habe Erfahrung in Full-Stack-Entwicklung und Softwaretests gesammelt. Bei der BCS-IT GmbH habe ich zuerst als Entwicklerin ein Praktikumsverwaltungssystem gebaut; jetzt führe ich dort als QA-Praktikantin manuelle Tests und Testautomatisierung mit Playwright durch.", "ab3": "Ich habe mich noch nicht auf ein Fachgebiet festgelegt und bin offen dafür, verschiedene Technologiebereiche zu entdecken und mich ständig weiterzuentwickeln.", "kv1": "STANDORT", "kv2": "HOCHSCHULE", "kv3": "SPRACHEN", "kv4": "TEAMARBEIT", "kv5": "COMMUNITY", "kv6": "FÜHRERSCHEIN", "ted": "TED Universität", "clsB": "Klasse B", "exH": "Berufserfahrung", "exC": "git log --karriere", "exF": "~/karriere — git log", "brQ": "(qa-praktikum)", "brD": "(entwickler-praktikum)", "dQ": "Sep. 2026 – heute", "dD": "Juni 2026 – Juli 2026", "jQ": "Praktikantin Softwaretest (QA)", "jD": "Praktikantin Softwareentwicklung", "jT": "Digital-Plattform-Team (Teilzeit)", "oB": "BCS-IT GmbH, Deutschland", "oB2": "BCS-IT GmbH, Deutschland · <a href=\"https://interncrm.com\" style=\"color:var(--coral)\">interncrm.com ↗</a>", "oT": "EdTech-Startup · Technopark der Universität Ankara", "q1": "Im Projekt Salevali erstelle ich Testfälle, führe Funktions- und Regressionstests durch und melde und verfolge Fehler.", "q2": "Nach einer Playwright-Schulung entwickle ich End-to-End-Testautomatisierung (E2E).", "q3": "Im Scrum-Team nehme ich an Sprint Planning, Daily Stand-ups, Sprint Reviews und Retrospektiven teil.", "d1": "Ich habe Internship CRM entwickelt, das die Excel-basierte Verwaltung ersetzt und Mentor–Mentee-Beziehungen sowie den Bewerbungsprozess für Praktika steuert.", "d2": "Ich habe rollenbasierte Dashboards für Admins, Mentoren und Mentees mit Next.js 15, React 19, TypeScript und Tailwind CSS erstellt.", "d3": "Ich habe die MySQL-Datenbank mit Prisma ORM modelliert und eine 7-stufige Bewerber-Pipeline, Gesprächsprotokolle und Filter entwickelt.", "d4": "Ich habe NextAuth-Authentifizierung (JWT), E-Mail-Einladungen und node-cron-Erinnerungen eingerichtet, die App mit Docker paketiert und Unterstützung für 3 Sprachen ergänzt.", "t1": "Ich habe an der Entwicklung und Verbesserung der digitalen Plattform eines EdTech-Startups mitgearbeitet, parallel zum Studium.", "prH": "Projekte", "prC": "ls ~/projekte", "live": "live", "hD": "Ein Schnelllese- und Leseverständnisprogramm, das Kindern und Erwachsenen hilft, flüssiger zu lesen und Gelesenes besser zu verstehen. Ich entwickle es gemeinsam mit einem Teammitglied.", "hY": "2026 – heute", "h1b": "Ich habe in den Modulen KEİS, Akıllı Kurs (Smart Course), Paragraf und Hausaufgaben Funktionen entwickelt und Fehler behoben.", "h2b": "Ich habe institutionsbezogene Regeln zur Modulfreigabe in einer mehrstufigen Kontohierarchie konzipiert.", "h3b": "Ich habe ein gemeinsames Soundsystem für Übungen, Avatare und Verbesserungen für schwache Internetverbindungen entwickelt.", "h4b": "Ich habe das Admin-Panel getestet und Fehler gemeldet; Releases habe ich mit Backups und Rollback-Möglichkeit veröffentlicht.", "h5b": "Ich arbeite daran, kontobasierte Türkisch/Englisch-Sprachunterstützung im gesamten System einzuführen.", "iD": "Eine Plattform, die Praktikums- und Mentoringprogramme von der Bewerbung bis zur Einstellung abbildet: getrennte Ansichten für Mentees, Mentoren und Partnerunternehmen, eine stufenbasierte Bewerber-Pipeline und Gesprächsverwaltung. Ein Open-Source-Projekt (AGPL-3.0), das wir während meines Entwicklerpraktikums im Team gebaut haben; verfügbar auf Englisch, Türkisch und Deutsch.", "fD": "Eine mandantenfähige SaaS-Finanzplattform mit Rechnungsstellung, Scheckverwaltung, automatischen Erinnerungen und Datenimport/-export. Rollenbasierte Zugriffskontrolle, mandantenbezogene Datenisolierung, eine CSRF-geschützte Sicherheitsschicht und End-to-End-Tests mit Playwright.", "cD": "Ein ER-Diagramm mit den Entitäten Event, User, Location und Organizer sowie ein normalisiertes Datenbankschema mit 1:N- und N:M-Beziehungen für Campus-Veranstaltungen.", "erm": "ER-Modellierung", "stH": "Stack &amp; Tests", "stF": "sude.spec.ts — Testbericht", "rerun": "↻ erneut ausführen", "edH": "Ausbildung &amp; Engagement", "edC": "cat ausbildung.yml", "edF": "ausbildung.yml", "coF": "engagement.yml", "e1": "<b>TED Universität — Computer Engineering (auf Englisch)</b><span>Bachelor · 2023 – heute</span>", "e2": "<b>TED Universität — Learning Engineering (auf Englisch)</b><span>Nebenfach · 2026 – heute</span>", "e3": "<b>Cahit Elginkan Anadolu-Gymnasium</b><span>2018 – 2022</span>", "e4": "<b>Software Engineering (3 Kurse) — HKUST, Coursera</b><span>Zertifikat · 2026</span>", "e5": "<b>Playwright: Web Automation Testing From Zero to Hero — Udemy</b><span>Zertifikat · 2026</span>", "e6": "<b>Java-Entwickler-Komplettkurs (42 Stunden) — Ankyra Analytics</b><span>Zertifikat · 2025</span>", "c1": "<b>Präsidentin — Filmclub der TED Universität</b><span>3 Jahre</span>", "c2": "<b>Organization Lead — Google Developer Group on Campus TEDÜ</b><span>2 Jahre · Eventplanung, Teamkoordination, Sponsorenbeziehungen</span>", "c3": "<b>Ehrenamtlich — LÖSEV (Stiftung für Kinder mit Leukämie)</b><span>2024 – 2026</span>", "tmC": "Befehl eingeben oder unten anklicken", "ctH": "Sag Hallo.", "ctS": "Für Praktikums- und Projektangebote erreichen Sie mich per E-Mail oder über LinkedIn.", "ctB": "mail_senden()", "ctK": "e-mail"}};
 {
 document.documentElement.classList.add("js");
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const S=v=>`<span class="s">"${v}"</span>`;
+
+/* Turkish texts are read from the page itself */
+I18N.tr={};
+document.querySelectorAll("[data-i]").forEach(el=>{I18N.tr[el.dataset.i]=el.innerHTML});
+
+/* language-specific dynamic content */
+const L={
+tr:{
+  html:"tr",
+  roles:["Bilgisayar mühendisliği öğrencisi","Web geliştirme","Test otomasyonu","Eğitim teknolojileri","Yeni alanlara açık"],
+  ts:[["ad",S("Sude Begüm Yüksel")],["okul",S("TED Üniversitesi")],["bolum",S("Bilgisayar Mühendisliği")],["yanDal",S("Öğrenme Mühendisliği")],["sinif",'<span class="n">4</span>'],["deneyim",`[${S("Web")}, ${S("Test")}, ${S("EdTech")}]`],["alan",S("henüz seçmedim")],["sehir",S("Ankara")],["yeniAlanlaraAcik",'<span class="k">true</span>']],
+  stackKeys:["dil","web","veritabani","test","araclar","ai"],manual:"Manuel test",
+  readme:["# Merhaba, ben Sude","Bilgisayar mühendisliği öğrencisiyim.","Farklı alanları deneyerek öğreniyorum.",["Şu an","stajyer @ BCS-IT GmbH"],["Yan proje","hizliokuyabilirsin.com"],["Topluluk","GDG on Campus TEDÜ"],["Yeni alanlara","her zaman açık"]],
+  deps:[["programlama","TypeScript, JavaScript, Java (OOP), C#, C, Python, SQL"],["web","Next.js (App Router), React, Node.js, Tailwind CSS, HTML & CSS"],["veritabani","PostgreSQL, MySQL, MS SQL, Prisma ORM, ER modelleme"],["test","Manuel test, senaryo yazımı, regresyon, hata raporlama, Playwright"],["araclar","Git & GitHub, Docker, NextAuth / Auth.js, UML"],["surec","Scrum / Agile"],["yapay-zeka","Claude, Claude Code, ChatGPT, Codex, GitHub Copilot"]],
+  version:"4.0.0-ogrenci",
+  suites:[["deneyim",["Next.js 15 ve TypeScript ile rol bazlı Internship CRM geliştirdi","Prisma ile 7 aşamalı aday akışını modelledi","Salevali'de fonksiyonel ve regresyon testleri yürütüyor","Playwright ile E2E test otomasyonu yazıyor"]],["projeler",["Canlıdaki bir eğitim platformunu geliştiriyor","Multi-tenant SaaS için RBAC ve güvenlik katmanı kurdu","Normalize bir MS SQL şeması tasarladı"]],["ekip",["Scrum toplantılarında aktif","3 yıl sinema topluluğu başkanlığı","2 yıl GDG organizasyon lead'liği"]]],
+  tests:"test",
+  welcome:'Merhaba! Portfolyo terminaline hoş geldin. Başlamak için <span class="s">help</span> yaz.',
+  notFound:c=>`komut bulunamadı: ${c} — 'help' yaz`,
+  chips:["help","whoami","deneyim","projeler","stack","iletisim","kahve","clear"],
+  out:{
+    help:"Komutlar: whoami, deneyim, projeler, stack, iletisim, egitim, kahve, sudo, clear",
+    whoami:"Sude Begüm Yüksel — TED Üniversitesi Bilgisayar Mühendisliği 4. sınıf\nYan dal: Öğrenme Mühendisliği · Ankara",
+    exp:"2026–   QA Stajyeri @ BCS-IT GmbH (Salevali, Playwright)\n2026    Developer Stajyeri @ BCS-IT GmbH (Internship CRM)\n2024–25 Dijital Platform Ekibi @ Ankara Üni. Teknokent",
+    proj:["canlıda","multi-tenant SaaS finans platformu","MS SQL veritabanı tasarımı"],
+    edu:"TED Üniversitesi — Bilgisayar Müh. (lisans) + Öğrenme Müh. (yan dal)\nSertifikalar: HKUST/Coursera, Udemy Playwright, Ankyra Java",
+    mail:"e-posta ",
+    coffee:"☕ Kahve hazırlanıyor... %100\nError 418: I'm a teapot. Çay da olur.",
+    sudo:"Bu işlem için yetkin yok. Ama staj teklifi gönderebilirsin :)"
+  }
+},
+en:{
+  html:"en",
+  roles:["Computer engineering student","Web development","Test automation","Education technology","Open to new fields"],
+  ts:[["name",S("Sude Begüm Yüksel")],["school",S("TED University")],["major",S("Computer Engineering")],["minor",S("Learning Engineering")],["year",'<span class="n">4</span>'],["experience",`[${S("Web")}, ${S("Testing")}, ${S("EdTech")}]`],["field",S("not chosen yet")],["city",S("Ankara")],["openToNewFields",'<span class="k">true</span>']],
+  stackKeys:["languages","web","databases","testing","tools","ai"],manual:"Manual testing",
+  readme:["# Hi, I'm Sude","I'm a computer engineering student.","I learn by trying out different fields.",["Now","intern @ BCS-IT GmbH"],["Side project","hizliokuyabilirsin.com"],["Community","GDG on Campus TEDÜ"],["New fields","always welcome"]],
+  deps:[["programming","TypeScript, JavaScript, Java (OOP), C#, C, Python, SQL"],["web","Next.js (App Router), React, Node.js, Tailwind CSS, HTML & CSS"],["databases","PostgreSQL, MySQL, MS SQL, Prisma ORM, ER modelling"],["testing","Manual testing, test case design, regression, bug reporting, Playwright"],["tools","Git & GitHub, Docker, NextAuth / Auth.js, UML"],["process","Scrum / Agile"],["ai","Claude, Claude Code, ChatGPT, Codex, GitHub Copilot"]],
+  version:"4.0.0-student",
+  suites:[["experience",["built a role-based Internship CRM with Next.js 15 and TypeScript","modelled a 7-stage candidate pipeline with Prisma","runs functional and regression tests on Salevali","writes E2E test automation with Playwright"]],["projects",["builds a live education platform","set up RBAC and a security layer for a multi-tenant SaaS","designed a normalised MS SQL schema"]],["team",["active in Scrum ceremonies","3 years as film club president","2 years as GDG organization lead"]]],
+  tests:"tests",
+  welcome:'Hi! Welcome to the portfolio terminal. Type <span class="s">help</span> to get started.',
+  notFound:c=>`command not found: ${c} — type 'help'`,
+  chips:["help","whoami","experience","projects","stack","contact","coffee","clear"],
+  out:{
+    help:"Commands: whoami, experience, projects, stack, contact, education, coffee, sudo, clear",
+    whoami:"Sude Begüm Yüksel — 4th-year Computer Engineering student, TED University\nMinor: Learning Engineering · Ankara",
+    exp:"2026–   QA Intern @ BCS-IT GmbH (Salevali, Playwright)\n2026    Developer Intern @ BCS-IT GmbH (Internship CRM)\n2024–25 Digital Platform Team @ Ankara Univ. Technopark",
+    proj:["live","multi-tenant SaaS finance platform","MS SQL database design"],
+    edu:"TED University — Computer Eng. (bachelor) + Learning Eng. (minor)\nCertificates: HKUST/Coursera, Udemy Playwright, Ankyra Java",
+    mail:"email   ",
+    coffee:"☕ Brewing coffee... 100%\nError 418: I'm a teapot. Tea works too.",
+    sudo:"You don't have permission for that. But you can send an internship offer :)"
+  }
+},
+de:{
+  html:"de",
+  roles:["Studentin der Informatik","Webentwicklung","Testautomatisierung","Bildungstechnologie","Offen für Neues"],
+  ts:[["name",S("Sude Begüm Yüksel")],["hochschule",S("TED Universität")],["fach",S("Computer Engineering")],["nebenfach",S("Learning Engineering")],["jahr",'<span class="n">4</span>'],["erfahrung",`[${S("Web")}, ${S("Testing")}, ${S("EdTech")}]`],["schwerpunkt",S("noch offen")],["stadt",S("Ankara")],["offenFuerNeues",'<span class="k">true</span>']],
+  stackKeys:["sprachen","web","datenbanken","testing","tools","ki"],manual:"Manuelles Testen",
+  readme:["# Hallo, ich bin Sude","Ich studiere Computer Engineering.","Ich lerne, indem ich verschiedene Bereiche ausprobiere.",["Aktuell","Praktikantin @ BCS-IT GmbH"],["Nebenprojekt","hizliokuyabilirsin.com"],["Community","GDG on Campus TEDÜ"],["Neue Bereiche","immer willkommen"]],
+  deps:[["programmierung","TypeScript, JavaScript, Java (OOP), C#, C, Python, SQL"],["web","Next.js (App Router), React, Node.js, Tailwind CSS, HTML & CSS"],["datenbanken","PostgreSQL, MySQL, MS SQL, Prisma ORM, ER-Modellierung"],["testing","Manuelles Testen, Testfalldesign, Regression, Fehlerberichte, Playwright"],["tools","Git & GitHub, Docker, NextAuth / Auth.js, UML"],["prozess","Scrum / Agile"],["ki","Claude, Claude Code, ChatGPT, Codex, GitHub Copilot"]],
+  version:"4.0.0-studentin",
+  suites:[["erfahrung",["hat ein rollenbasiertes Internship CRM mit Next.js 15 und TypeScript gebaut","hat eine 7-stufige Bewerber-Pipeline mit Prisma modelliert","führt Funktions- und Regressionstests bei Salevali durch","schreibt E2E-Testautomatisierung mit Playwright"]],["projekte",["entwickelt eine Live-Lernplattform","hat RBAC und eine Sicherheitsschicht für ein Multi-Tenant-SaaS umgesetzt","hat ein normalisiertes MS-SQL-Schema entworfen"]],["team",["aktiv in Scrum-Meetings","3 Jahre Präsidentin des Filmclubs","2 Jahre GDG Organization Lead"]]],
+  tests:"Tests",
+  welcome:'Hallo! Willkommen im Portfolio-Terminal. Gib <span class="s">help</span> ein, um zu starten.',
+  notFound:c=>`Befehl nicht gefunden: ${c} — gib 'help' ein`,
+  chips:["help","whoami","erfahrung","projekte","stack","kontakt","kaffee","clear"],
+  out:{
+    help:"Befehle: whoami, erfahrung, projekte, stack, kontakt, ausbildung, kaffee, sudo, clear",
+    whoami:"Sude Begüm Yüksel — Computer Engineering, 4. Studienjahr, TED Universität\nNebenfach: Learning Engineering · Ankara",
+    exp:"2026–   QA-Praktikantin @ BCS-IT GmbH (Salevali, Playwright)\n2026    Entwickler-Praktikantin @ BCS-IT GmbH (Internship CRM)\n2024–25 Digital-Plattform-Team @ Technopark Univ. Ankara",
+    proj:["live","Multi-Tenant-SaaS-Finanzplattform","MS-SQL-Datenbankdesign"],
+    edu:"TED Universität — Computer Eng. (Bachelor) + Learning Eng. (Nebenfach)\nZertifikate: HKUST/Coursera, Udemy Playwright, Ankyra Java",
+    mail:"e-mail  ",
+    coffee:"☕ Kaffee wird gekocht... 100%\nError 418: I'm a teapot. Tee geht auch.",
+    sudo:"Dafür fehlt dir die Berechtigung. Aber du kannst ein Praktikumsangebot schicken :)"
+  }
+}
+};
+let lang="tr",T=L.tr;
 
 /* editor tabs */
-const files=[
-document.getElementById("src").innerHTML,
-`{
-  <span class="f">"dil"</span>: [<span class="s">"TypeScript"</span>, <span class="s">"JavaScript"</span>, <span class="s">"Java"</span>, <span class="s">"C#"</span>, <span class="s">"Python"</span>, <span class="s">"SQL"</span>],
-  <span class="f">"web"</span>: [<span class="s">"Next.js"</span>, <span class="s">"React"</span>, <span class="s">"Node.js"</span>, <span class="s">"Tailwind"</span>],
-  <span class="f">"veritabani"</span>: [<span class="s">"PostgreSQL"</span>, <span class="s">"MySQL"</span>, <span class="s">"Prisma"</span>],
-  <span class="f">"test"</span>: [<span class="s">"Playwright"</span>, <span class="s">"Manuel test"</span>],
-  <span class="f">"araclar"</span>: [<span class="s">"Git"</span>, <span class="s">"Docker"</span>, <span class="s">"Auth.js"</span>],
-  <span class="f">"ai"</span>: [<span class="s">"Claude Code"</span>, <span class="s">"Codex"</span>, <span class="s">"Copilot"</span>]
-}`,
-`<span class="k"># Merhaba, ben Sude</span>
-
-<span class="c">Bilgisayar mühendisliği öğrencisiyim.</span>
-<span class="c">Farklı alanları deneyerek öğreniyorum.</span>
-
-<span class="n">-</span> Şu an: stajyer @ BCS-IT GmbH
-<span class="n">-</span> Yan proje: hizliokuyabilirsin.com
-<span class="n">-</span> Topluluk: GDG on Campus TEDÜ
-<span class="n">-</span> Yeni alanlara: <span class="s">her zaman açık</span>`
-];
 const src=document.getElementById("src"),ln=document.getElementById("ln");
+let files=[],cur=0;
+const buildFiles=()=>{
+  const ts=`<span class="k">const</span> sude: <span class="t">Developer</span> = {\n`+T.ts.map(([k,v])=>`  ${k}: ${v},`).join("\n")+`\n};`;
+  const vals=[[S("TypeScript"),S("JavaScript"),S("Java"),S("C#"),S("Python"),S("SQL")],[S("Next.js"),S("React"),S("Node.js"),S("Tailwind")],[S("PostgreSQL"),S("MySQL"),S("Prisma")],[S("Playwright"),S(T.manual)],[S("Git"),S("Docker"),S("Auth.js")],[S("Claude Code"),S("Codex"),S("Copilot")]];
+  const js=`{\n`+T.stackKeys.map((k,i)=>`  <span class="f">"${k}"</span>: [${vals[i].join(", ")}]`).join(",\n")+`\n}`;
+  const r=T.readme;
+  const md=`<span class="k">${r[0]}</span>\n\n<span class="c">${r[1]}</span>\n<span class="c">${r[2]}</span>\n\n`+r.slice(3).map(([a,b],i)=>`<span class="n">-</span> ${a}: ${i===3?`<span class="s">${b}</span>`:b}`).join("\n");
+  files=[ts,js,md];
+};
 const setLines=()=>{const n=src.textContent.split("\n").length;ln.textContent=Array.from({length:n},(_,i)=>i+1).join("\n")};
-const showFile=i=>{src.innerHTML=files[i]+'<span class="blink"></span>';setLines();document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.f==i))};
+const showFile=i=>{cur=i;src.innerHTML=files[i]+'<span class="blink"></span>';setLines();document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.f==i))};
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>showFile(+t.dataset.f)));
-showFile(0);
 
 /* typed role */
-const roles=["Bilgisayar mühendisliği öğrencisi","Web geliştirme","Test otomasyonu","Eğitim teknolojileri","Yeni alanlara açık"];
 const typed=document.getElementById("typed");
-if(!reduce){let r=0,c=roles[0].length,del=true;const tick=()=>{const w=roles[r];if(del){c--;if(c<=0){del=false;r=(r+1)%roles.length}}else{c++;if(c>=roles[r].length){del=true;setTimeout(tick,1600);typed.textContent=roles[r];return}}typed.textContent=roles[r].slice(0,Math.max(c,0));setTimeout(tick,del?38:70)};setTimeout(tick,2000)}
+let r=0,c=0,del=true,tTimer;
+const tick=()=>{const roles=T.roles;if(r>=roles.length)r=0;if(del){c--;if(c<=0){del=false;r=(r+1)%roles.length}}else{c++;if(c>=roles[r].length){del=true;typed.textContent=roles[r];tTimer=setTimeout(tick,1600);return}}typed.textContent=roles[r].slice(0,Math.max(c,0));tTimer=setTimeout(tick,del?38:70)};
+const startTyping=()=>{clearTimeout(tTimer);r=0;typed.textContent=T.roles[0];c=T.roles[0].length;del=true;if(!reduce)tTimer=setTimeout(tick,2000)};
 
 /* package.json */
-const deps=[["programlama","TypeScript, JavaScript, Java (OOP), C#, C, Python, SQL"],["web","Next.js (App Router), React, Node.js, Tailwind CSS, HTML & CSS"],["veritabani","PostgreSQL, MySQL, MS SQL, Prisma ORM, ER modelleme"],["test","Manuel test, senaryo yazımı, regresyon, hata raporlama, Playwright"],["araclar","Git & GitHub, Docker, NextAuth / Auth.js, UML"],["surec","Scrum / Agile"],["yapay-zeka","Claude, Claude Code, ChatGPT, Codex, GitHub Copilot"]];
-const pl=[['{',''],['<span class="f">"name"</span>: <span class="s">"sude-begum-yuksel"</span>,','ind'],['<span class="f">"version"</span>: <span class="s">"4.0.0-ogrenci"</span>,','ind'],['<span class="f">"dependencies"</span>: {','ind']];
-deps.forEach(([k,v],i)=>pl.push([`<span class="f">"${k}"</span>: <span class="s">"${esc(v)}"</span>${i<deps.length-1?",":""}`,'ind2']));
-pl.push(['}','ind'],['}','']);
-document.getElementById("pkg").innerHTML=pl.map(([h,c],i)=>`<div class="row"><span class="ln">${i+1}</span><span class="${c}">${h}</span></div>`).join("");
+const buildPkg=()=>{
+  const pl=[['{',''],['<span class="f">"name"</span>: <span class="s">"sude-begum-yuksel"</span>,','ind'],[`<span class="f">"version"</span>: <span class="s">"${T.version}"</span>,`,'ind'],['<span class="f">"dependencies"</span>: {','ind']];
+  T.deps.forEach(([k,v],i)=>pl.push([`<span class="f">"${k}"</span>: <span class="s">"${esc(v)}"</span>${i<T.deps.length-1?",":""}`,'ind2']));
+  pl.push(['}','ind'],['}','']);
+  document.getElementById("pkg").innerHTML=pl.map(([h,cl],i)=>`<div class="row"><span class="ln">${i+1}</span><span class="${cl}">${h}</span></div>`).join("");
+};
 
 /* test runner */
-const suites=[
-["deneyim",["Next.js 15 ve TypeScript ile rol bazlı Internship CRM geliştirdi","Prisma ile 7 aşamalı aday akışını modelledi","Salevali'de fonksiyonel ve regresyon testleri yürütüyor","Playwright ile E2E test otomasyonu yazıyor"]],
-["projeler",["Canlıdaki bir eğitim platformunu geliştiriyor","Multi-tenant SaaS için RBAC ve güvenlik katmanı kurdu","Normalize bir MS SQL şeması tasarladı"]],
-["ekip",["Scrum toplantılarında aktif","3 yıl sinema topluluğu başkanlığı","2 yıl GDG organizasyon lead'liği"]]
-];
-const total=suites.reduce((a,s)=>a+s[1].length,0);
 const box=document.getElementById("suites"),passTxt=document.getElementById("passTxt"),barI=document.getElementById("barI");
-box.innerHTML=suites.map(([n,ts])=>`<div class="suite"><h3>${n}.spec <small>${ts.length} test</small></h3>${ts.map(t=>`<div class="test">${esc(t)}</div>`).join("")}</div>`).join("");
-const tests=[...box.querySelectorAll(".test")];
+let tests=[],total=0,timer;
+const buildTests=()=>{
+  total=T.suites.reduce((a,s)=>a+s[1].length,0);
+  box.innerHTML=T.suites.map(([n,ts])=>`<div class="suite"><h3>${n}.spec <small>${ts.length} ${T.tests}</small></h3>${ts.map(t=>`<div class="test">${esc(t)}</div>`).join("")}</div>`).join("");
+  tests=[...box.querySelectorAll(".test")];done(total);
+};
 const done=n=>{passTxt.textContent=`${n}/${total} passed`;barI.style.width=(n/total*100)+"%"};
-let timer;
-const runTests=()=>{clearInterval(timer);if(reduce){tests.forEach(t=>t.classList.remove("wait"));done(total);return}tests.forEach(t=>t.classList.add("wait"));let i=0;done(0);timer=setInterval(()=>{tests[i].classList.remove("wait");i++;done(i);if(i>=tests.length)clearInterval(timer)},140)};
-done(total);
+const runTests=()=>{clearInterval(timer);if(reduce){tests.forEach(t=>t.classList.remove("wait"));done(total);return}tests.forEach(t=>t.classList.add("wait"));let i=0;done(0);timer=setInterval(()=>{if(!tests[i]){clearInterval(timer);return}tests[i].classList.remove("wait");i++;done(i);if(i>=tests.length)clearInterval(timer)},140)};
 document.getElementById("rerun").addEventListener("click",runTests);
 const sec=document.getElementById("yetkinlikler");
 if("IntersectionObserver" in window&&!reduce){const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){runTests();io.disconnect()}},{threshold:.35});io.observe(sec)}
 
 /* terminal */
-const out=document.getElementById("out"),tin=document.getElementById("tin");
-const L='<a href="https://www.linkedin.com/in/sude-begum-yuksel-9127b8324">linkedin.com/in/sude-begum-yuksel-9127b8324</a>';
-const cmds={
-help:()=>"Komutlar: whoami, deneyim, projeler, stack, iletisim, egitim, kahve, sudo, clear",
-whoami:()=>"Sude Begüm Yüksel — TED Üniversitesi Bilgisayar Mühendisliği 4. sınıf\nYan dal: Öğrenme Mühendisliği · Ankara",
-deneyim:()=>"2026–  QA Stajyeri @ BCS-IT GmbH (Salevali, Playwright)\n2026    Developer Stajyeri @ BCS-IT GmbH (Internship CRM)\n2024–25 Dijital Platform Ekibi @ Ankara Üni. Teknokent",
-projeler:()=>'hizli-okuyabilirsin  ● canlıda  <a href="https://hizliokuyabilirsin.com">hizliokuyabilirsin.com</a>\ninterncrm            ● canlıda  <a href="https://interncrm.com">interncrm.com</a>\nfinansmax            multi-tenant SaaS finans platformu\ncampus-events        MS SQL veritabanı tasarımı',
-stack:()=>"TypeScript · Next.js · React · Node.js · PostgreSQL · MySQL · Prisma · Docker · Playwright",
-egitim:()=>"TED Üniversitesi — Bilgisayar Müh. (lisans) + Öğrenme Müh. (yan dal)\nSertifikalar: HKUST/Coursera, Udemy Playwright, Ankyra Java",
-iletisim:()=>"e-posta  sudebegumyksl@gmail.com\nlinkedin "+L+'\ngithub   <a href="https://github.com/sudebegumyksl">github.com/sudebegumyksl</a>',
-kahve:()=>"☕ Kahve hazırlanıyor... %100\nError 418: I'm a teapot. Çay da olur.",
-sudo:()=>"Bu işlem için yetkin yok. Ama staj teklifi gönderebilirsin :)",
-clear:()=>{out.innerHTML="";return null}
-};
-const print=(html,cls)=>{const d=document.createElement("div");if(cls)d.className=cls;d.innerHTML=html;out.appendChild(d);out.scrollTop=out.scrollHeight};
-const run=raw=>{const c=raw.trim().toLowerCase();if(!c)return;print(`<span class="prompt">sude@portfolyo:~$</span> ${esc(raw)}`);const f=cmds[c]||cmds[c.replace(/^sudo .*/,"sudo")];if(!f){print(`komut bulunamadı: ${esc(c)} — 'help' yaz`);return}const r=f();if(r!==null)print(r);print("&nbsp;")};
-print('Merhaba! Portfolyo terminaline hoş geldin. Başlamak için <span class="s">help</span> yaz.');
-print("&nbsp;");
-run("whoami");
+const out=document.getElementById("out"),tin=document.getElementById("tin"),chips=document.getElementById("chips");
+const LI='<a href="https://www.linkedin.com/in/sude-begum-yuksel-9127b8324">linkedin.com/in/sude-begum-yuksel-9127b8324</a>';
+const GH='<a href="https://github.com/sudebegumyksl">github.com/sudebegumyksl</a>';
+const alias={help:"help",yardim:"help",hilfe:"help",whoami:"whoami",deneyim:"exp",experience:"exp",erfahrung:"exp",projeler:"proj",projects:"proj",projekte:"proj",stack:"stack",iletisim:"mail","iletişim":"mail",contact:"mail",kontakt:"mail",egitim:"edu","eğitim":"edu",education:"edu",ausbildung:"edu",kahve:"coffee",coffee:"coffee",kaffee:"coffee",sudo:"sudo",clear:"clear"};
+const outFor=k=>{const o=T.out;switch(k){
+  case "help":return o.help;case "whoami":return o.whoami;case "exp":return o.exp;
+  case "proj":return `hizli-okuyabilirsin  ● ${o.proj[0]}  <a href="https://hizliokuyabilirsin.com">hizliokuyabilirsin.com</a>\ninterncrm            ● ${o.proj[0]}  <a href="https://interncrm.com">interncrm.com</a>\nfinansmax            ${o.proj[1]}\ncampus-events        ${o.proj[2]}`;
+  case "stack":return "TypeScript · Next.js · React · Node.js · PostgreSQL · MySQL · Prisma · Docker · Playwright";
+  case "edu":return o.edu;
+  case "mail":return `${o.mail} sudebegumyksl@gmail.com\nlinkedin  ${LI}\ngithub    ${GH}`;
+  case "coffee":return o.coffee;case "sudo":return o.sudo;
+  case "clear":out.innerHTML="";return null;}};
+const print=html=>{const d=document.createElement("div");d.innerHTML=html;out.appendChild(d);out.scrollTop=out.scrollHeight};
+const run=raw=>{const cmd=raw.trim().toLowerCase();if(!cmd)return;print(`<span class="prompt">sude@portfolyo:~$</span> ${esc(raw)}`);const k=alias[cmd]||(cmd.startsWith("sudo ")?"sudo":null);if(!k){print(T.notFound(esc(cmd)));return}const res=outFor(k);if(res!==null)print(res);print("&nbsp;")};
+const resetTerm=()=>{out.innerHTML="";print(T.welcome);print("&nbsp;");run("whoami");chips.innerHTML=T.chips.map(x=>`<button class="chip" type="button" data-c="${x}">${x}</button>`).join("")};
 document.getElementById("tf").addEventListener("submit",e=>{e.preventDefault();run(tin.value);tin.value=""});
-const chipList=["help","whoami","deneyim","projeler","stack","iletisim","kahve","clear"];
-const chips=document.getElementById("chips");
-chips.innerHTML=chipList.map(c=>`<button class="chip" type="button" data-c="${c}">${c}</button>`).join("");
 chips.addEventListener("click",e=>{const b=e.target.closest(".chip");if(b)run(b.dataset.c)});
+
+/* language switch */
+const setLang=(l,save)=>{
+  if(!L[l])l="tr";lang=l;T=L[l];
+  document.documentElement.lang=T.html;
+  const d=I18N[l];
+  document.querySelectorAll("[data-i]").forEach(el=>{const v=d[el.dataset.i];if(v!==undefined)el.innerHTML=v});
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  buildFiles();showFile(cur);startTyping();buildPkg();buildTests();resetTerm();
+  if(save){try{localStorage.setItem("lang",l)}catch(e){}}
+};
+document.querySelector(".lang").addEventListener("click",e=>{const b=e.target.closest("button[data-l]");if(b)setLang(b.dataset.l,true)});
+let start="tr";
+try{const q=new URLSearchParams(location.search).get("lang");const s=localStorage.getItem("lang");const nav=(navigator.language||"tr").slice(0,2).toLowerCase();start=(q&&L[q])?q:(s&&L[s])?s:(nav==="tr"?"tr":nav==="de"?"de":"en")}catch(e){}
+setLang(start,false);
 }
+
 </script>
 </body>
 </html>
